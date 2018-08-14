@@ -11,7 +11,7 @@ namespace SecretSanta
 	{
 		//TODO: Replace with *.azurewebsites.net url after deploying backend to Azure
         public static string AzureBackendUrl = "http://secretsantamobileappservice.azurewebsites.net";
-        public static bool UseMockDataStore = false;
+        public static bool UseMockDataStore = true;
 		
 		public App ()
 		{

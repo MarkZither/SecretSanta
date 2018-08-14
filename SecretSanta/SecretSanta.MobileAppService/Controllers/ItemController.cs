@@ -9,56 +9,56 @@ namespace SecretSanta.Controllers
     public class ItemController : Controller
 	{
 
-		private readonly IItemRepository ItemRepository;
+		private readonly IParticipantRepository ParticipantRepository;
 
-		public ItemController(IItemRepository itemRepository)
+		public ItemController(IParticipantRepository participantRepository)
 		{
-			ItemRepository = itemRepository;
+            ParticipantRepository = participantRepository;
 		}
 
 		[HttpGet]
 		public IActionResult List()
 		{
-			return Ok(ItemRepository.GetAll());
+			return Ok(ParticipantRepository.GetAll());
 		}
 
 		[HttpGet("{Id}")]
-		public Item GetItem(string id)
+		public Participant GetItem(string id)
 		{
-			Item item = ItemRepository.Get(id);
-			return item;
+            Participant participant = ParticipantRepository.Get(id);
+			return participant;
 		}
 
 		[HttpPost]
-		public IActionResult Create([FromBody]Item item)
+		public IActionResult Create([FromBody]Participant participant)
 		{
 			try
 			{
-				if (item == null || !ModelState.IsValid)
+				if (participant == null || !ModelState.IsValid)
 				{
 					return BadRequest("Invalid State");
 				}
 
-				ItemRepository.Add(item);
+                ParticipantRepository.Add(participant);
 
 			}
 			catch (Exception)
 			{
 				return BadRequest("Error while creating");
 			}
-			return Ok(item);
+			return Ok(participant);
 		}
 
 		[HttpPut]
-		public IActionResult Edit([FromBody] Item item)
+		public IActionResult Edit([FromBody] Participant participant)
 		{
 			try
 			{
-				if (item == null || !ModelState.IsValid)
+				if (participant == null || !ModelState.IsValid)
 				{
 					return BadRequest("Invalid State");
 				}
-				ItemRepository.Update(item);
+				ParticipantRepository.Update(participant);
 			}
 			catch (Exception)
 			{
@@ -70,7 +70,7 @@ namespace SecretSanta.Controllers
 		[HttpDelete("{Id}")]
 		public void Delete(string id)
 		{
-			ItemRepository.Remove(id);
+			ParticipantRepository.Remove(id);
 		}
 	}
 }

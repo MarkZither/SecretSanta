@@ -24,10 +24,10 @@ namespace SecretSanta.Views
         {
             InitializeComponent();
 
-            var item = new Item
+            var item = new Participant
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Name = "Mark",
+                Email = "mark@test.com."
             };
 
             viewModel = new ItemDetailViewModel(item);

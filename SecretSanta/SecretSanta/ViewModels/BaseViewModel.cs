@@ -12,7 +12,7 @@ namespace SecretSanta.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Participant> DataStore => DependencyService.Get<IDataStore<Participant>>() ?? new MockDataStore();
 
         bool isBusy = false;
         public bool IsBusy
@@ -33,7 +33,9 @@ namespace SecretSanta.ViewModels
             Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
+            {
                 return false;
+            }
 
             backingStore = value;
             onChanged?.Invoke();
@@ -47,7 +49,9 @@ namespace SecretSanta.ViewModels
         {
             var changed = PropertyChanged;
             if (changed == null)
+            {
                 return;
+            }
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

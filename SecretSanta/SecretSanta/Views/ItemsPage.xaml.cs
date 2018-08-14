@@ -27,9 +27,11 @@ namespace SecretSanta.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Participant;
             if (item == null)
+            {
                 return;
+            }
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
@@ -39,6 +41,13 @@ namespace SecretSanta.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
+            var res = SecretSanta.Services.SecretSantaGenerator.Generate(viewModel.Items);
+            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+        }
+
+        async void SantaItem_Clicked(object sender, EventArgs e)
+        {
+            var res = SecretSanta.Services.SecretSantaGenerator.GenerateAll(viewModel.Items);
             await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
 
@@ -47,7 +56,9 @@ namespace SecretSanta.Views
             base.OnAppearing();
 
             if (viewModel.Items.Count == 0)
+            {
                 viewModel.LoadItemsCommand.Execute(null);
+            }
         }
     }
 }

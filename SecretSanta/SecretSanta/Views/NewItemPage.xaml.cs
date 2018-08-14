@@ -11,16 +11,16 @@ namespace SecretSanta.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Participant Item { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Item = new Participant
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Name = "Mark",
+                Email = "mark@test.com"
             };
 
             BindingContext = this;

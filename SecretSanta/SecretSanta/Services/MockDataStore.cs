@@ -7,21 +7,25 @@ using SecretSanta.Models;
 
 namespace SecretSanta.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Participant>
     {
-        List<Item> items;
+        List<Participant> items;
 
         public MockDataStore()
         {
-            items = new List<Item>();
-            var mockItems = new List<Item>
+            items = new List<Participant>();
+            var mockItems = new List<Participant>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Mark",  Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Caitriona", Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Mum",  Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Clive", Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Sam",  Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Caroline",  Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Stef",  Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Diane",  Email="This is an item description." },
+                new Participant { Id = Guid.NewGuid().ToString(), Name = "Uncle Mark",  Email="This is an item description." },
+
             };
 
             foreach (var item in mockItems)
@@ -30,16 +34,16 @@ namespace SecretSanta.Services
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Participant item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Participant item)
         {
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var _item = items.Where((Participant arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(_item);
             items.Add(item);
 
@@ -48,18 +52,18 @@ namespace SecretSanta.Services
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var _item = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
+            var _item = items.Where((Participant arg) => arg.Id == id).FirstOrDefault();
             items.Remove(_item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Participant> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Participant>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

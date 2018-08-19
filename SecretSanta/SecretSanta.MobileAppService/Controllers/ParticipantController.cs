@@ -6,12 +6,12 @@ using SecretSanta.Models;
 namespace SecretSanta.Controllers
 {
     [Route("api/[controller]")]
-    public class ItemController : Controller
+    public class ParticipantController : Controller
 	{
 
 		private readonly IParticipantRepository ParticipantRepository;
 
-		public ItemController(IParticipantRepository participantRepository)
+		public ParticipantController(IParticipantRepository participantRepository)
 		{
             ParticipantRepository = participantRepository;
 		}
@@ -23,7 +23,7 @@ namespace SecretSanta.Controllers
 		}
 
 		[HttpGet("{Id}")]
-		public Participant GetItem(string id)
+		public Participant GetItem(int id)
 		{
             Participant participant = ParticipantRepository.Get(id);
 			return participant;
@@ -68,7 +68,7 @@ namespace SecretSanta.Controllers
 		}
 
 		[HttpDelete("{Id}")]
-		public void Delete(string id)
+		public void Delete(int id)
 		{
 			ParticipantRepository.Remove(id);
 		}

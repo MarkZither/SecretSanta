@@ -41,14 +41,43 @@ namespace SecretSanta.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            var res = SecretSanta.Services.SecretSantaGenerator.Generate(viewModel.Items);
             await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
 
         async void SantaItem_Clicked(object sender, EventArgs e)
         {
-            var res = SecretSanta.Services.SecretSantaGenerator.GenerateAll(viewModel.Items);
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            var mark = viewModel.Items.Single(x => x.Name.Equals("Mark"));
+            var cai = viewModel.Items.Single(x => x.Name.Equals("Caitriona"));
+            var clive = viewModel.Items.Single(x => x.Name.Equals("Clive"));
+            var mum = viewModel.Items.Single(x => x.Name.Equals("Mum"));
+            var sam = viewModel.Items.Single(x => x.Name.Equals("Sam"));
+            var car = viewModel.Items.Single(x => x.Name.Equals("Caroline"));
+            var stef = viewModel.Items.Single(x => x.Name.Equals("Stef"));
+            var di = viewModel.Items.Single(x => x.Name.Equals("Diane"));
+            var umark = viewModel.Items.Single(x => x.Name.Equals("Uncle Mark"));
+            Dictionary<Participant, Participant> banned = new Dictionary<Participant, Participant>();
+            banned.Add(mark, cai);
+            banned.Add(cai, mark);
+            banned.Add(clive, sam);
+            banned.Add(sam, clive);
+            banned.Add(stef, car);
+            banned.Add(car, stef);
+            banned.Add(di, umark);
+            banned.Add(umark, di);
+            try
+            {
+                var res = SecretSanta.Services.SecretSantaGenerator.Generate(viewModel.Items, banned);
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in res)
+                {
+                    sb.AppendLine($"{item.Key.Name} ==> {item.Value.Name}");
+                }
+                await DisplayAlert("Generated Santa matches", sb.ToString(), "Cancel");
+            }
+            catch(ApplicationException aex) when (aex.Message.Equals("No valid santa list can be generated"))
+            {
+                await DisplayAlert("Generated Santa matches", aex.Message, "Cancel");
+            }
         }
 
         protected override void OnAppearing()

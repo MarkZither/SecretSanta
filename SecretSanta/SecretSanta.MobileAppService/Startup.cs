@@ -30,7 +30,7 @@ namespace SecretSanta.MobileAppService
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
-			services.AddSingleton<IItemRepository, ItemRepository>();
+			services.AddSingleton<IParticipantRepository, ParticipantRepository>();
 
 			services.AddSwaggerGen(c =>
 			{

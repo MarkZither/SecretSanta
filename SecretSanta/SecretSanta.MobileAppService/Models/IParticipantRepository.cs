@@ -7,8 +7,8 @@ namespace SecretSanta.Models
     {
 		void Add(Participant item);
 		void Update(Participant item);
-        Participant Remove(string key);
-        Participant Get(string id);
+        Participant Remove(int key);
+        Participant Get(int id);
 		IEnumerable<Participant> GetAll();
 	}
 }

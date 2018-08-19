@@ -16,16 +16,15 @@ namespace SecretSanta.Services
             items = new List<Participant>();
             var mockItems = new List<Participant>
             {
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Mark",  Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Caitriona", Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Mum",  Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Clive", Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Sam",  Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Caroline",  Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Stef",  Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Diane",  Email="This is an item description." },
-                new Participant { Id = Guid.NewGuid().ToString(), Name = "Uncle Mark",  Email="This is an item description." },
-
+                new Participant { Id = 1, Name = "Mark",  Email="This is an item description." },
+                new Participant { Id = 2, Name = "Caitriona", Email="This is an item description." },
+                new Participant { Id = 3, Name = "Mum",  Email="This is an item description." },
+                new Participant { Id = 4, Name = "Clive", Email="This is an item description." },
+                new Participant { Id = 5, Name = "Sam",  Email="This is an item description." },
+                new Participant { Id = 6, Name = "Caroline",  Email="This is an item description." },
+                new Participant { Id = 7, Name = "Stef",  Email="This is an item description." },
+                new Participant { Id = 8, Name = "Diane",  Email="This is an item description." },
+                new Participant { Id = 9, Name = "Uncle Mark",  Email="This is an item description." },
             };
 
             foreach (var item in mockItems)

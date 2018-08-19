@@ -1,56 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using SQLite;
+using System.Data;
+using System.IO;
+using System.Linq;
 
 namespace SecretSanta.Models
 {
-	public class ItemRepository : IParticipantRepository
+	public class ParticipantRepository : BaseRepository, IParticipantRepository
     {
-		private static ConcurrentDictionary<string, Participant> participants =
-			new ConcurrentDictionary<string, Participant>();
+        private SQLiteConnection _connection;
 
-		public ItemRepository()
-		{
-			Add(new Participant { Id = Guid.NewGuid().ToString(), Name = "Item 1", Email = "This is an item description." });
-			Add(new Participant { Id = Guid.NewGuid().ToString(), Name = "Item 2", Email = "This is an item description." });
-			Add(new Participant { Id = Guid.NewGuid().ToString(), Name = "Item 3", Email = "This is an item description." });
-		}
+        public ParticipantRepository()
+        {
+            if (!File.Exists(DbFile))
+            {
+                CreateDatabase();
+            }
+            _connection = SimpleDbConnection();
+        }
 
-		public Participant Get(string id)
+        public Participant Get(int id)
 		{
-			return participants[id];
+			return _connection.Table<Participant>().Single(x => x.Id.Equals(id));
 		}
 
 		public IEnumerable<Participant> GetAll()
 		{
-			return participants.Values;
+            var query = _connection.Table<Participant>();
+            return query;
 		}
 
 		public void Add(Participant participant)
 		{
-            participant.Id = Guid.NewGuid().ToString();
-            participants[participant.Id] = participant;
+            var s = _connection.Insert(participant);
 		}
 
-		public Participant Find(string id)
+		public Participant Find(int id)
 		{
-            Participant participant;
-            participants.TryGetValue(id, out participant);
-
-			return participant;
+            Participant participant = _connection.Table<Participant>().Single(x => x.Id.Equals(id));
+            return participant;
 		}
 
-		public Participant Remove(string id)
+		public Participant Remove(int id)
 		{
-            Participant participant;
-            participants.TryRemove(id, out participant);
+            Participant participant = _connection.Table<Participant>().Single(x => x.Id.Equals(id));
+            _connection.Delete(participant);
 
 			return participant;
 		}
 
 		public void Update(Participant participant)
 		{
-            participants[participant.Id] = participant;
+            _connection.Update(participant);
 		}
 	}
 }

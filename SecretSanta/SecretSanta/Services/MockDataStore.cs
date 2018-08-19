@@ -49,7 +49,7 @@ namespace SecretSanta.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             var _item = items.Where((Participant arg) => arg.Id == id).FirstOrDefault();
             items.Remove(_item);
@@ -57,7 +57,7 @@ namespace SecretSanta.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Participant> GetItemAsync(string id)
+        public async Task<Participant> GetItemAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }

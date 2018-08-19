@@ -33,7 +33,7 @@ namespace SecretSanta.Services
 			return items;
 		}
 
-		public async Task<Participant> GetItemAsync(string id)
+		public async Task<Participant> GetItemAsync(int id)
 		{
 			if (id != null && CrossConnectivity.Current.IsConnected)
 			{
@@ -74,9 +74,9 @@ namespace SecretSanta.Services
 			return response.IsSuccessStatusCode;
 		}
 
-		public async Task<bool> DeleteItemAsync(string id)
+		public async Task<bool> DeleteItemAsync(int id)
 		{
-            if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+            if (!CrossConnectivity.Current.IsConnected)
             {
                 return false;
             }

@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 using SecretSanta.Models;
 using SecretSanta.MobileAppService.Services;
+using SecretSanta.MobileAppService.Config;
 
 namespace SecretSanta.MobileAppService
 {
@@ -38,6 +39,9 @@ namespace SecretSanta.MobileAppService
             services.AddSingleton<IParticipantRepository, ParticipantRepository>();
             services.AddSingleton<IHistoryRepository, HistoryRepository>();
             services.AddTransient<IEmailService, MailGunService>();
+            var config = new MailGunConfiguration();
+            Configuration.Bind("MailGun", config);
+            services.AddSingleton(config);
 
             services.AddSwaggerGen(c =>
 			{

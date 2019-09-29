@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /SecretSanta/SecretSanta.MobileAppService/db/secretsanta.db
+/.git-rewrite/map

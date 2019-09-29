@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using SecretSanta.Models;
@@ -17,9 +19,9 @@ namespace SecretSanta.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult List()
+		public async Task<IEnumerable<Participant>> List()
 		{
-			return Ok(ParticipantRepository.GetAll());
+			return ParticipantRepository.GetAll();
 		}
 
 		[HttpGet("{Id}")]

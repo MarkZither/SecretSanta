@@ -5,20 +5,15 @@ using SQLite;
 using System.Data;
 using System.IO;
 using System.Linq;
+using SQLiteNetExtensions.Extensions;
 
 namespace SecretSanta.Models
 {
 	public class ParticipantRepository : BaseRepository, IParticipantRepository
     {
-        private SQLiteConnection _connection;
-
-        public ParticipantRepository()
+        public ParticipantRepository() : base()
         {
-            if (!File.Exists(DbFile))
-            {
-                CreateDatabase();
-            }
-            _connection = SimpleDbConnection();
+
         }
 
         public Participant Get(int id)
@@ -28,7 +23,7 @@ namespace SecretSanta.Models
 
 		public IEnumerable<Participant> GetAll()
 		{
-            var query = _connection.Table<Participant>();
+            var query = _connection.GetAllWithChildren<Participant>();
             return query;
 		}
 

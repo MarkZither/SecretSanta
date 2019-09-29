@@ -17,15 +17,22 @@ namespace SecretSanta.Services
 
         public static IDictionary<T, T> Generate<T>(IList<T> participants, IDictionary<T, T> bannedPairings)
         {
+            
             var to = participants.GetShuffle();
 
             foreach (var from in participants.GetShuffle().GetPermutations())
             {
                 var result = to.ZipToKV(from);
-
-                if (PairingIsValid(bannedPairings, result))
+                var isValidPairings = false;
+                var tries = 1;
+                while (!isValidPairings && tries < 10)
                 {
-                    return result.ToDictionary();
+                    if (PairingIsValid(bannedPairings, result))
+                    {
+                        isValidPairings = true;
+                        return result.ToDictionary();
+                    }
+                    tries++;
                 }
             }
 

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 
 using SecretSanta.Models;
+using SecretSanta.MobileAppService.Services;
 
 namespace SecretSanta.MobileAppService
 {
@@ -22,6 +23,7 @@ namespace SecretSanta.MobileAppService
 				.AddEnvironmentVariables();
 
 			Configuration = builder.Build();
+            //var kry = Configuration["MailGunApiKey"];
 		}
 
 		public IConfigurationRoot Configuration { get; }
@@ -29,14 +31,23 @@ namespace SecretSanta.MobileAppService
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddMvc();
-			services.AddSingleton<IParticipantRepository, ParticipantRepository>();
+			services.AddMvc().AddJsonOptions(options => {
+                //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            services.AddSingleton<IParticipantRepository, ParticipantRepository>();
+            services.AddSingleton<IHistoryRepository, HistoryRepository>();
+            services.AddTransient<IEmailService, MailGunService>();
 
-			services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
 			});
-		}
+
+            services
+                .AddFluentEmail("santa@secretsanta.mark-burton.com")
+                .AddRazorRenderer();
+        }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

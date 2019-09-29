@@ -9,21 +9,27 @@ namespace SecretSanta
 {
 	public partial class App : Application
 	{
-		//TODO: Replace with *.azurewebsites.net url after deploying backend to Azure
-        public static string AzureBackendUrl = "http://secretsantamobileappservice.azurewebsites.net";
+        //TODO: Replace with *.azurewebsites.net url after deploying backend to Azure
+        public static string AzureBackendUrl = "https://secretsantamobileappservice.azurewebsites.net";
+
         public static bool UseMockDataStore = false;
 		
 		public App ()
 		{
-			InitializeComponent();
+#if DEBUG
+            AzureBackendUrl = "http://localhost:5000";
+#endif
+            InitializeComponent();
 
             if (UseMockDataStore)
             {
                 DependencyService.Register<MockDataStore>();
+                DependencyService.Register<MockMessagingDataStore>();
             }
             else
             {
                 DependencyService.Register<AzureDataStore>();
+                DependencyService.Register<MessagingDataStore>();
             }
 
 			MainPage = new MainPage();

@@ -49,7 +49,7 @@ namespace SecretSanta.Views
             var mark = viewModel.Items.Single(x => x.Name.Equals("Mark"));
             var cai = viewModel.Items.Single(x => x.Name.Equals("Caitriona"));
             var clive = viewModel.Items.Single(x => x.Name.Equals("Clive"));
-            var mum = viewModel.Items.Single(x => x.Name.Equals("Mum"));
+            var mum = viewModel.Items.Single(x => x.Name.Equals("Ann"));
             var sam = viewModel.Items.Single(x => x.Name.Equals("Sam"));
             var car = viewModel.Items.Single(x => x.Name.Equals("Caroline"));
             var stef = viewModel.Items.Single(x => x.Name.Equals("Stef"));
@@ -70,11 +70,13 @@ namespace SecretSanta.Views
                 StringBuilder sb = new StringBuilder();
                 foreach (var item in res)
                 {
+                    var sent = await viewModel.MessagingDataStore.AddItemAsync(new Message() { GifterId = item.Key.Id, RecipientId = item.Value.Id });
                     sb.AppendLine($"{item.Key.Name} ==> {item.Value.Name}");
                 }
-                await DisplayAlert("Generated Santa matches", sb.ToString(), "Cancel");
+                //await DisplayAlert("Generated Santa matches", sb.ToString(), "Cancel");
+                await DisplayAlert("Generated Santa matches", "It is a Secret!", "Ok");
             }
-            catch(ApplicationException aex) when (aex.Message.Equals("No valid santa list can be generated"))
+            catch (ApplicationException aex) when (aex.Message.Equals("No valid santa list can be generated"))
             {
                 await DisplayAlert("Generated Santa matches", aex.Message, "Cancel");
             }

@@ -3,8 +3,9 @@ using FluentEmail.Core.Defaults;
 using FluentEmail.Core.Models;
 using FluentEmail.Mailgun;
 using FluentEmail.Razor;
+using Microsoft.Extensions.Options;
 using RazorLight;
-using SecretSanta.MobileAppService.Config;
+using SecretSanta.MobileAppService.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,16 +16,16 @@ namespace SecretSanta.MobileAppService.Services
 {
     public class MailGunService : IEmailService
     {
-        private MailGunConfiguration Config { get; set; }
-        public MailGunService(MailGunConfiguration config)
+        private MailGunOptions _options { get; set; }
+        public MailGunService(IOptions<MailGunOptions> config)
         {
-            Config = config;
+            _options = config.Value;
         }
         public async Task<SendResponse> Send(string toEmail, string toName, string givePresentTo)
         {
             var sender = new MailgunSender(
-                Config.Domain, // Mailgun Domain
-                Config.APIKey, // Mailgun API Key
+                _options.Domain, // Mailgun Domain
+                _options.APIKey, // Mailgun API Key
                 MailGunRegion.EU
             );
 
@@ -39,7 +40,7 @@ namespace SecretSanta.MobileAppService.Services
                    .From("santa@secretsanta.mark-burton.com")
                    .To(toEmail, toName)
                    .Subject(subject)
-                   .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/EmailTemplate.cshtml", new { Name = givePresentTo, GifterName = toName }); ;
+                   .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/EmailTemplate.cshtml", new { Name = givePresentTo, GifterName = toName });
             }
             catch (TemplateCompilationException tex)
             {

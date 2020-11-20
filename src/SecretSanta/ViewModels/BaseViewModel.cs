@@ -12,7 +12,7 @@ namespace SecretSanta.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Participant> DataStore => DependencyService.Get<IDataStore<Participant>>() ?? new MockDataStore();
+        public IDataStore<ParticipantDTO> DataStore => DependencyService.Get<IDataStore<ParticipantDTO>>() ?? new MockDataStore();
         public IDataStore<Message> MessagingDataStore => DependencyService.Get<IDataStore<Message>>() ?? new MockMessagingDataStore();
 
         bool isBusy = false;

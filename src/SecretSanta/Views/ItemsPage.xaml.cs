@@ -27,7 +27,7 @@ namespace SecretSanta.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Participant;
+            var item = args.SelectedItem as ParticipantDTO;
             if (item == null)
             {
                 return;
@@ -53,17 +53,22 @@ namespace SecretSanta.Views
             var sam = viewModel.Items.Single(x => x.Name.Equals("Sam"));
             var car = viewModel.Items.Single(x => x.Name.Equals("Caroline"));
             var stef = viewModel.Items.Single(x => x.Name.Equals("Stef"));
-            var di = viewModel.Items.Single(x => x.Name.Equals("Diane"));
+            var di = viewModel.Items.Single(x => x.Name.Equals("Dianne"));
             var umark = viewModel.Items.Single(x => x.Name.Equals("Uncle Mark"));
-            Dictionary<Participant, Participant> banned = new Dictionary<Participant, Participant>();
-            banned.Add(mark, cai);
-            banned.Add(cai, mark);
-            banned.Add(clive, sam);
-            banned.Add(sam, clive);
-            banned.Add(stef, car);
-            banned.Add(car, stef);
-            banned.Add(di, umark);
-            banned.Add(umark, di);
+            List<KeyValuePair<ParticipantDTO, ParticipantDTO>> banned = new List<KeyValuePair<ParticipantDTO, ParticipantDTO>>();
+            Dictionary<ParticipantDTO, ParticipantDTO> banned2 = new Dictionary<ParticipantDTO, ParticipantDTO>();
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(mark, cai));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(cai, mark));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, sam));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(sam, clive));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(stef, car));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(car, stef));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(di, umark));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(umark, di));
+            // add last years
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, cai));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(cai, clive));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(di, stef));
             try
             {
                 var res = SecretSanta.Services.SecretSantaGenerator.Generate(viewModel.Items, banned);

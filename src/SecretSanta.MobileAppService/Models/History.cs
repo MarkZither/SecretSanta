@@ -2,6 +2,7 @@
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SecretSanta.Models
 {
@@ -18,6 +19,7 @@ namespace SecretSanta.Models
         public DateTime MatchDate { get; set; }
 
         [ManyToOne("GifterId")]
+        [JsonIgnore]
         public Participant Gifter { get; set; }
     }
 }

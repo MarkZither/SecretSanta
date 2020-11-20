@@ -2,7 +2,7 @@
 
 namespace SecretSanta.Models
 {
-    public class Participant
+    public record ParticipantDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

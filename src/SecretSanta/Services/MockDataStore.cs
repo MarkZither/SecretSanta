@@ -7,24 +7,24 @@ using SecretSanta.Models;
 
 namespace SecretSanta.Services
 {
-    public class MockDataStore : IDataStore<Participant>
+    public class MockDataStore : IDataStore<ParticipantDTO>
     {
-        List<Participant> items;
+        List<ParticipantDTO> items;
 
         public MockDataStore()
         {
-            items = new List<Participant>();
-            var mockItems = new List<Participant>
+            items = new List<ParticipantDTO>();
+            var mockItems = new List<ParticipantDTO>
             {
-                new Participant { Id = 1, Name = "Mark",  Email="This is an item description." },
-                new Participant { Id = 2, Name = "Caitriona", Email="This is an item description." },
-                new Participant { Id = 3, Name = "Mum",  Email="This is an item description." },
-                new Participant { Id = 4, Name = "Clive", Email="This is an item description." },
-                new Participant { Id = 5, Name = "Sam",  Email="This is an item description." },
-                new Participant { Id = 6, Name = "Caroline",  Email="This is an item description." },
-                new Participant { Id = 7, Name = "Stef",  Email="This is an item description." },
-                new Participant { Id = 8, Name = "Diane",  Email="This is an item description." },
-                new Participant { Id = 9, Name = "Uncle Mark",  Email="This is an item description." },
+                new ParticipantDTO { Id = 1, Name = "Mark",  Email="This is an item description." },
+                new ParticipantDTO { Id = 2, Name = "Caitriona", Email="This is an item description." },
+                new ParticipantDTO { Id = 3, Name = "Mum",  Email="This is an item description." },
+                new ParticipantDTO { Id = 4, Name = "Clive", Email="This is an item description." },
+                new ParticipantDTO { Id = 5, Name = "Sam",  Email="This is an item description." },
+                new ParticipantDTO { Id = 6, Name = "Caroline",  Email="This is an item description." },
+                new ParticipantDTO { Id = 7, Name = "Stef",  Email="This is an item description." },
+                new ParticipantDTO { Id = 8, Name = "Diane",  Email="This is an item description." },
+                new ParticipantDTO { Id = 9, Name = "Uncle Mark",  Email="This is an item description." },
             };
 
             foreach (var item in mockItems)
@@ -33,16 +33,16 @@ namespace SecretSanta.Services
             }
         }
 
-        public async Task<bool> AddItemAsync(Participant item)
+        public async Task<bool> AddItemAsync(ParticipantDTO item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Participant item)
+        public async Task<bool> UpdateItemAsync(ParticipantDTO item)
         {
-            var _item = items.Where((Participant arg) => arg.Id == item.Id).FirstOrDefault();
+            var _item = items.Where((ParticipantDTO arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(_item);
             items.Add(item);
 
@@ -51,18 +51,18 @@ namespace SecretSanta.Services
 
         public async Task<bool> DeleteItemAsync(int id)
         {
-            var _item = items.Where((Participant arg) => arg.Id == id).FirstOrDefault();
+            var _item = items.Where((ParticipantDTO arg) => arg.Id == id).FirstOrDefault();
             items.Remove(_item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Participant> GetItemAsync(int id)
+        public async Task<ParticipantDTO> GetItemAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Participant>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<ParticipantDTO>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

@@ -5,46 +5,58 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
+using Polly;
+using Polly.Retry;
 using SecretSanta.Models;
 
 namespace SecretSanta.Services
 {
-	public class AzureDataStore : IDataStore<Participant>
+	public class AzureDataStore : IDataStore<ParticipantDTO>
 	{
 		HttpClient client;
-		IEnumerable<Participant> items;
+		IEnumerable<ParticipantDTO> items;
+		int maxRetryAttempts = 3;
+		TimeSpan pauseBetweenFailures = TimeSpan.FromSeconds(2);
+		AsyncRetryPolicy retryPolicy;
 
 		public AzureDataStore()
 		{
 			client = new HttpClient();
 			client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+			retryPolicy = Policy
+				.Handle<HttpRequestException>()
+				.WaitAndRetryAsync(maxRetryAttempts, i => pauseBetweenFailures);
 
-			items = new List<Participant>();
+			items = new List<ParticipantDTO>();
 		}
 
-		public async Task<IEnumerable<Participant>> GetItemsAsync(bool forceRefresh = false)
+		public async Task<IEnumerable<ParticipantDTO>> GetItemsAsync(bool forceRefresh = false)
 		{
 			if (forceRefresh && CrossConnectivity.Current.IsConnected)
 			{
-				var json = await client.GetStringAsync($"api/Participant");
-				items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Participant>>(json));
+				await retryPolicy.ExecuteAsync(async () =>
+				{
+					var json = await client.GetStringAsync($"api/Participant");
+
+					items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<ParticipantDTO>>(json));
+				});
 			}
 
 			return items;
 		}
 
-		public async Task<Participant> GetItemAsync(int id)
+		public async Task<ParticipantDTO> GetItemAsync(int id)
 		{
 			if (id != null && CrossConnectivity.Current.IsConnected)
 			{
 				var json = await client.GetStringAsync($"api/item/{id}");
-				return await Task.Run(() => JsonConvert.DeserializeObject<Participant>(json));
+				return await Task.Run(() => JsonConvert.DeserializeObject<ParticipantDTO>(json));
 			}
 
 			return null;
 		}
 
-		public async Task<bool> AddItemAsync(Participant item)
+		public async Task<bool> AddItemAsync(ParticipantDTO item)
 		{
             if (item == null || !CrossConnectivity.Current.IsConnected)
             {
@@ -58,7 +70,7 @@ namespace SecretSanta.Services
 			return response.IsSuccessStatusCode;
 		}
 
-		public async Task<bool> UpdateItemAsync(Participant item)
+		public async Task<bool> UpdateItemAsync(ParticipantDTO item)
 		{
             if (item == null || item.Id == 0 || !CrossConnectivity.Current.IsConnected)
             {

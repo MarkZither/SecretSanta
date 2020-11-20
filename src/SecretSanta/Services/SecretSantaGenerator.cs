@@ -12,10 +12,10 @@ namespace SecretSanta.Services
     {
         public static IDictionary<T, T> Generate<T>(IList<T> participants)
         {
-            return Generate(participants, new Dictionary<T, T>());
+            return Generate(participants, new List<KeyValuePair<T, T>>());
         }
 
-        public static IDictionary<T, T> Generate<T>(IList<T> participants, IDictionary<T, T> bannedPairings)
+        public static IDictionary<T, T> Generate<T>(IList<T> participants, List<KeyValuePair<T, T>> bannedPairings)
         {
             
             var to = participants.GetShuffle();
@@ -39,7 +39,7 @@ namespace SecretSanta.Services
             throw new ApplicationException("No valid santa list can be generated");
         }
 
-        private static bool PairingIsValid<T>(IDictionary<T, T> bannedPairings, IEnumerable<KeyValuePair<T, T>> result)
+        private static bool PairingIsValid<T>(List<KeyValuePair<T, T>> bannedPairings, IEnumerable<KeyValuePair<T, T>> result)
         {
             foreach (var r in result)
             {
@@ -53,10 +53,10 @@ namespace SecretSanta.Services
 
         public static IEnumerable<IDictionary<T, T>> GenerateAll<T>(IList<T> participants)
         {
-            return GenerateAll(participants, new Dictionary<T, T>());
+            return GenerateAll(participants, new List<KeyValuePair<T, T>>());
         }
 
-        public static IEnumerable<IDictionary<T, T>> GenerateAll<T>(IList<T> participants, IDictionary<T, T> bannedPairings)
+        public static IEnumerable<IDictionary<T, T>> GenerateAll<T>(IList<T> participants, List<KeyValuePair<T, T>> bannedPairings)
         {
             var to = participants.GetShuffle();
 

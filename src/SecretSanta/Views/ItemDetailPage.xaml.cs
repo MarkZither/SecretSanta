@@ -24,7 +24,7 @@ namespace SecretSanta.Views
         {
             InitializeComponent();
 
-            var item = new Participant
+            var item = new ParticipantDTO
             {
                 Name = "Mark",
                 Email = "mark@test.com."

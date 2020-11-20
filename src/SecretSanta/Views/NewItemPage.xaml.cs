@@ -11,13 +11,13 @@ namespace SecretSanta.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
     {
-        public Participant Item { get; set; }
+        public ParticipantDTO Item { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Participant
+            Item = new ParticipantDTO
             {
                 Name = "Mark",
                 Email = "mark@test.com"

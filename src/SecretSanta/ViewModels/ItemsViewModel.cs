@@ -12,18 +12,18 @@ namespace SecretSanta.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Participant> Items { get; set; }
+        public ObservableCollection<ParticipantDTO> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Participant>();
+            Items = new ObservableCollection<ParticipantDTO>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Participant>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, ParticipantDTO>(this, "AddItem", async (obj, item) =>
             {
-                var _item = item as Participant;
+                var _item = item as ParticipantDTO;
                 Items.Add(_item);
                 await DataStore.AddItemAsync(_item);
             });

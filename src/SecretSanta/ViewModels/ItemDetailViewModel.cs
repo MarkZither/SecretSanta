@@ -6,8 +6,8 @@ namespace SecretSanta.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Participant Item { get; set; }
-        public ItemDetailViewModel(Participant item = null)
+        public ParticipantDTO Item { get; set; }
+        public ItemDetailViewModel(ParticipantDTO item = null)
         {
             Title = item?.Name;
             Item = item;

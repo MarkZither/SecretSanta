@@ -35,7 +35,7 @@ namespace SecretSanta.Services
 
 		public async Task<Message> GetItemAsync(int id)
 		{
-			if (id != null && CrossConnectivity.Current.IsConnected)
+			if (id > 0 && CrossConnectivity.Current.IsConnected)
 			{
 				var json = await client.GetStringAsync($"api/Messaging/{id}");
 				return await Task.Run(() => JsonConvert.DeserializeObject<Message>(json));

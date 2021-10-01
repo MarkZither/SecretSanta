@@ -5,6 +5,8 @@ using FluentEmail.Mailgun;
 using FluentEmail.Razor;
 using Microsoft.Extensions.Options;
 using RazorLight;
+using RazorLight.Compilation;
+
 using SecretSanta.MobileAppService.Options;
 using System;
 using System.Collections.Generic;

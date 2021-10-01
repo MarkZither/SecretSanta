@@ -47,7 +47,7 @@ namespace SecretSanta.Services
 
 		public async Task<ParticipantDTO> GetItemAsync(int id)
 		{
-			if (id != null && CrossConnectivity.Current.IsConnected)
+			if (id > 0 && CrossConnectivity.Current.IsConnected)
 			{
 				var json = await client.GetStringAsync($"api/item/{id}");
 				return await Task.Run(() => JsonConvert.DeserializeObject<ParticipantDTO>(json));

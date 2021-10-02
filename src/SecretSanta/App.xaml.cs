@@ -4,7 +4,7 @@ using SecretSanta.Services;
 using SecretSanta.Views;
 using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
+//[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SecretSanta
 {
 	public partial class App : Application

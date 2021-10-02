@@ -8,7 +8,7 @@
 
   <Identity
     Name="f91d06a5-163e-4959-8605-324abdc6b163"
-    Publisher="CN=deda9f57-f241-4ead-adcb-d22b56330fdf"
+    Publisher="CN=mburton"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>

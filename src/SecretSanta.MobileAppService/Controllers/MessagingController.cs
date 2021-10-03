@@ -23,24 +23,9 @@ namespace SecretSanta.MobileAppService.Controllers
             ParticipantRepository = participantRepository;
             HistoryRepository = historyRepository;
         }
-        // GET: api/Email2
-        [HttpGet]
-        public async Task<IEnumerable<string>> Get()
-        {
-            var result = await EmailService.Send("mark.burton@zither-it.co.uk", "Mark", "mum");
-            var result2 = await EmailService.Send("caitrionaflynn@yahoo.co.uk", "Caitriona", "Sam");
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Email/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST: api/Email
-        [HttpPost]
+        [HttpPost(Name = "SendMatchUsingPost")]
         public async Task<IActionResult> Post([FromBody] Message model)
         {
             var gifter = ParticipantRepository.Get(model.GifterId);
@@ -54,18 +39,6 @@ namespace SecretSanta.MobileAppService.Controllers
                 return new OkResult();
             }
             return new BadRequestObjectResult(result);
-        }
-
-        // PUT: api/Email/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

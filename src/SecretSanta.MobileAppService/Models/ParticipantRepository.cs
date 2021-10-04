@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using SQLiteNetExtensions.Extensions;
+using StackExchange.Profiling;
 
 namespace SecretSanta.Models
 {
@@ -23,8 +24,11 @@ namespace SecretSanta.Models
 
 		public IEnumerable<Participant> GetAll()
 		{
-            var query = _connection.GetAllWithChildren<Participant>();
-            return query;
+			using (MiniProfiler.Current.Step("Getting participants from the database"))
+			{
+				var query = _connection.GetAllWithChildren<Participant>();
+				return query;
+			}
 		}
 
 		public void Add(Participant participant)

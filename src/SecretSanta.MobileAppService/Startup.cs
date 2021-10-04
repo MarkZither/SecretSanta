@@ -13,6 +13,7 @@ using SecretSanta.MobileAppService.Services;
 using SecretSanta.MobileAppService.Options;
 using SecretSanta.MobileAppService.Extensions;
 using Microsoft.OpenApi.Models;
+using StackExchange.Profiling.Storage;
 
 namespace SecretSanta.MobileAppService
 {
@@ -35,8 +36,12 @@ namespace SecretSanta.MobileAppService
 
             //services.ConfigureOptions<MailGunOptions>();
             //services.AddTransient<IValidateOptions<SantaOptions>, ConfigureSantaOptions>();
-            services.AddSantaServices();
-
+            services.AddSantaServices();services.AddMemoryCache(); 
+            services.AddMiniProfiler(options => { options.RouteBasePath = "/profiler";
+                // Note: MiniProfiler will not work if a SizeLimit is set on MemoryCache!
+                //   See: https://github.com/MiniProfiler/dotnet/issues/501 for details
+                (options.Storage as MemoryCacheStorage).CacheDuration = TimeSpan.FromMinutes(60);
+            }).AddEntityFramework();
             //services.Configure<MailGunOptions>(Configuration.GetSection(MailGunOptions.MailGun));
 
             services.AddMvc();
@@ -68,6 +73,7 @@ namespace SecretSanta.MobileAppService
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseMiniProfiler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -85,8 +91,6 @@ namespace SecretSanta.MobileAppService
 			{
 				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
 			});
-
-            app.Run(async (context) => await Task.Run(() => context.Response.Redirect("/swagger")));
         }
     }
 }

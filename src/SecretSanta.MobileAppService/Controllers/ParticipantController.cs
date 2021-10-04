@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using SecretSanta.Models;
 
+using StackExchange.Profiling;
+
 namespace SecretSanta.Controllers
 {
     [Route("api/[controller]")]
@@ -24,7 +26,10 @@ namespace SecretSanta.Controllers
         [HttpGet(Name = "GetParticipantsUsingGet")]
         public async Task<IEnumerable<Participant>> List()
         {
-            return ParticipantRepository.GetAll();
+            using (MiniProfiler.Current.Step("Getting List of Participants"))
+            {
+                return ParticipantRepository.GetAll();
+            }
         }
 
         [HttpGet("{id}", Name = "GetParticipantByIdUsingGet")]

@@ -9,7 +9,8 @@ namespace SecretSanta.MobileAppService.Test
         [Fact]
         public async Task SendReturnsString()
         {
-            var emailService = new SecretSanta.MobileAppService.Services.MailGunService(Microsoft.Extensions.Options.Options.Create(new Options.MailGunOptions() {Domain = "", APIKey = "" }));
+            var emailService = new SecretSanta.MobileAppService.Services.MailGunService(Microsoft.Extensions.Options.Options.Create(new Options.MailGunOptions() 
+            {Domain = "", APIKey = "" }));
             var result = await emailService.Send("mark.burton@zither-it.co.uk", "Mark", "Caitriona");
             Assert.True(result.Successful);
         }

@@ -65,10 +65,8 @@ namespace SecretSanta.Views
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(car, stef));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(di, umark));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(umark, di));
-            // add last years
-            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, cai));
-            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(cai, clive));
-            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(di, stef));
+            // add anyone who was the same for last 2 years
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, mum));
             try
             {
                 var res = SecretSanta.Services.SecretSantaGenerator.Generate(viewModel.Items, banned);

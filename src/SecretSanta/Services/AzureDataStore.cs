@@ -65,7 +65,7 @@ namespace SecretSanta.Services
 
 			var serializedItem = JsonConvert.SerializeObject(item);
 
-			var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+			var response = await client.PostAsync($"api/participant", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
 			return response.IsSuccessStatusCode;
 		}

@@ -5,30 +5,25 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using SecretSanta.Models;
+using SecretSanta.ViewModels;
 
 namespace SecretSanta.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
     {
-        public ParticipantDTO Item { get; set; }
+        ItemDetailViewModel viewModel;
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new ParticipantDTO
-            {
-                Name = "Mark",
-                Email = "mark@test.com"
-            };
-
-            BindingContext = this;
+            BindingContext = viewModel = new ItemDetailViewModel();
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", viewModel.Item);
             await Navigation.PopModalAsync();
         }
     }

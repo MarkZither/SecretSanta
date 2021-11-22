@@ -24,13 +24,6 @@ namespace SecretSanta.Views
         {
             InitializeComponent();
 
-            var item = new ParticipantDTO
-            {
-                Name = "Mark",
-                Email = "mark@test.com."
-            };
-
-            viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
         }
     }

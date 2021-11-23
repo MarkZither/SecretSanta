@@ -19,5 +19,7 @@ namespace SecretSanta.Models
         public List<History> HistoryRecipients { get; set; }
         [OneToMany(/*inverseProperty: "GifterId", */CascadeOperations = CascadeOperation.All)]
         public List<History> HistoryGifters { get; set; }
+        [ForeignKey(typeof(Participant))]
+        public int? BannedParticipantId { get; set; }
     }
 }

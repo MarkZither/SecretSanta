@@ -15,7 +15,7 @@ namespace SecretSanta.Models
         {
             get
             {
-                return Environment.CurrentDirectory + "\\db\\secretsanta.db";
+                return Environment.CurrentDirectory + "\\db\\secretsanta2.db";
             }
         }
 
@@ -52,6 +52,11 @@ namespace SecretSanta.Models
                 var t = db.Insert(new Participant()
                 {
                     Name = "testc"
+                });
+                var t2 = db.Insert(new Participant()
+                {
+                    Name = "testd",
+                    BannedParticipantId = 1
                 });
                 var u = db.Insert(new History()
                 {

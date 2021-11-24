@@ -10,5 +10,6 @@ namespace SecretSanta.Models
         Participant Remove(int key);
         Participant Get(int id);
 		IEnumerable<Participant> GetAll();
+		IEnumerable<Participant> GetAllForLoggedInUser(Guid UserId);
 	}
 }

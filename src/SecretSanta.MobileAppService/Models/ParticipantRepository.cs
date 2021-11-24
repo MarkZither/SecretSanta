@@ -29,11 +29,21 @@ namespace SecretSanta.Models
 				var query = _connection.GetAllWithChildren<Participant>();
 				return query;
 			}
+		}		
+		
+		public IEnumerable<Participant> GetAllForLoggedInUser(Guid UserId)
+		{
+			using (MiniProfiler.Current.Step("Getting participants for the logged in user from the database"))
+			{
+				var query = _connection.Query<Participant>("select * from Participant where UserId = ?", UserId.ToString().ToUpperInvariant());
+				return query;
+			}
 		}
 
 		public void Add(Participant participant)
 		{
-            var s = _connection.Insert(participant);
+			participant.UserId = "71A32736-7B5B-4020-86F4-CCBF529802CE";
+			var s = _connection.Insert(participant);
 		}
 
 		public Participant Find(int id)

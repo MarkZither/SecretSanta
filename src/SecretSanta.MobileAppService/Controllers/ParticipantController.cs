@@ -28,7 +28,7 @@ namespace SecretSanta.Controllers
         {
             using (MiniProfiler.Current.Step("Getting List of Participants"))
             {
-                return ParticipantRepository.GetAll();
+                return ParticipantRepository.GetAllForLoggedInUser(new Guid("71A32736-7B5B-4020-86F4-CCBF529802CE"));
             }
         }
 

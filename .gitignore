@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /src/SecretSanta.MobileAppService/db/*.db
+*.db-wal
+*.db-shm

@@ -46,17 +46,26 @@ namespace SecretSanta.Models
                 
                 var part1 = new Participant()
                 {
-                    Name = "testb"
-                };
+                    Name = "testb",
+                    UserId = "71A32736-7B5B-4020-86F4-CCBF529802CE"
+            };
                 var s = db.Insert(part1);
                 var t = db.Insert(new Participant()
                 {
-                    Name = "testc"
+                    Name = "testc",
+                    UserId = "71A32736-7B5B-4020-86F4-CCBF529802CE"
                 });
                 var t2 = db.Insert(new Participant()
                 {
                     Name = "testd",
-                    BannedParticipantId = 1
+                    BannedParticipantId = 1,
+                    UserId = "71A32736-7B5B-4020-86F4-CCBF529802CE"
+                });
+                var t3 = db.Insert(new Participant()
+                {
+                    Name = "teste",
+                    BannedParticipantId = 1,
+                    UserId = "71A32736-7B5B-4020-86F4-CCBF529802CE"
                 });
                 var u = db.Insert(new History()
                 {

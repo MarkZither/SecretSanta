@@ -35,7 +35,7 @@ namespace SecretSanta.Models
 		{
 			using (MiniProfiler.Current.Step("Getting participants for the logged in user from the database"))
 			{
-				var query = _connection.Query<Participant>("select * from Participant where UserId = ?", UserId.ToString().ToUpperInvariant());
+				var query = _connection.Query<Participant>("select * from Participant where upper(UserId) = ?", UserId.ToString().ToUpperInvariant());
 				return query;
 			}
 		}

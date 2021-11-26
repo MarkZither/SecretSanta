@@ -21,8 +21,9 @@ namespace DuendeAspNetIdentityServer
             {
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
+                new ApiScope("api1"),
             };
-
+        //https://www.scottbrady91.com/identity-server/aspnet-core-swagger-ui-authorization-using-identityserver4
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
@@ -46,12 +47,26 @@ namespace DuendeAspNetIdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44300/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:44305/signin-oidc", "http://localhost:44305/swagger/oauth2-redirect.html" },
+                    FrontChannelLogoutUri = "https://localhost:5001/signout-oidc",
+                    PostLogoutRedirectUris = { "https://localhost:5001/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "scope2" }
+                    AllowedScopes = { "openid", "profile", "scope2", "api1" }
+                },
+                new Client
+                {
+                    ClientId = "demo_api_swagger",
+                    ClientName = "Swagger UI for demo_api",
+                    ClientSecrets = {new Secret("secret".Sha256())}, // change me!
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    RedirectUris = {"https://localhost:44305/swagger/oauth2-redirect.html"},
+                    AllowedCorsOrigins = {"https://localhost:44305"},
+                    AllowedScopes = {"api1"}
                 },
             };
     }

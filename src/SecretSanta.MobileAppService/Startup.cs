@@ -14,6 +14,7 @@ using SecretSanta.MobileAppService.Options;
 using SecretSanta.MobileAppService.Extensions;
 using Microsoft.OpenApi.Models;
 using StackExchange.Profiling.Storage;
+using System.Collections.Generic;
 
 namespace SecretSanta.MobileAppService
 {
@@ -45,15 +46,46 @@ namespace SecretSanta.MobileAppService
             //services.Configure<MailGunOptions>(Configuration.GetSection(MailGunOptions.MailGun));
 
             services.AddMvc();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("cookies")
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.Authority = "https://localhost:5001";
+                    options.ClientId = "interactive";
+                    options.MapInboundClaims = false;
+                    options.SaveTokens = true;
+                });
             services.AddApplicationInsightsTelemetry();
             services.AddSingleton<IParticipantRepository, ParticipantRepository>();
             services.AddSingleton<IHistoryRepository, HistoryRepository>();
             services.AddTransient<IEmailService, MailGunService>();
 
             services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-			});
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SecretSanta Service", Version = "v1" });
+                c.OperationFilter<AuthorizeOperationFilter>();
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://localhost:5001/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:5001/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"api1", "Demo API - full access"}
+                            }
+                        }
+                    }
+                });
+            });
+
 
             services
                 .AddFluentEmail("santa@secretsanta.mark-burton.com")
@@ -79,6 +111,7 @@ namespace SecretSanta.MobileAppService
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -87,10 +120,13 @@ namespace SecretSanta.MobileAppService
             });
 
             app.UseSwagger();
-			app.UseSwaggerUI(c =>
+			app.UseSwaggerUI(options =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-			});
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                options.OAuthClientId("demo_api_swagger");
+                options.OAuthAppName("Demo API - Swagger");
+                options.OAuthUsePkce();
+            });
         }
     }
 }

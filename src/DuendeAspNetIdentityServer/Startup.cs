@@ -3,6 +3,8 @@
 
 
 using Duende.IdentityServer;
+using Duende.IdentityServer.Services;
+
 using DuendeAspNetIdentityServer.Data;
 using IdentityServerHost.Models;
 using Microsoft.AspNetCore.Builder;
@@ -12,11 +14,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace DuendeAspNetIdentityServer
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
 
@@ -28,6 +32,14 @@ namespace DuendeAspNetIdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: MyAllowSpecificOrigins,
+            //                      builder =>
+            //                      {
+            //                          builder.WithOrigins("https://localhost:44305", "http://localhost:5002");
+            //                      });
+            //});
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -64,6 +76,15 @@ namespace DuendeAspNetIdentityServer
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+            services.AddSingleton<ICorsPolicyService>((container) =>
+            {
+                var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
+
+                return new DefaultCorsPolicyService(logger)
+                {
+                    AllowedOrigins = { "https://localhost:44305", "http://localhost:5002" }
+                };
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -77,6 +98,7 @@ namespace DuendeAspNetIdentityServer
             app.UseStaticFiles();
 
             app.UseRouting();
+            //app.UseCors(MyAllowSpecificOrigins);
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

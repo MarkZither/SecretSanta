@@ -47,7 +47,7 @@ namespace DuendeAspNetIdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "http://localhost:44305/signin-oidc", "http://localhost:44305/swagger/oauth2-redirect.html" },
+                    RedirectUris = { "https://localhost:44305/signin-oidc" },
                     FrontChannelLogoutUri = "https://localhost:5001/signout-oidc",
                     PostLogoutRedirectUris = { "https://localhost:5001/signout-callback-oidc" },
 
@@ -67,6 +67,22 @@ namespace DuendeAspNetIdentityServer
                     RedirectUris = {"https://localhost:44305/swagger/oauth2-redirect.html"},
                     AllowedCorsOrigins = {"https://localhost:44305"},
                     AllowedScopes = {"api1"}
+                },
+                new Client
+                {
+                    ClientId = "demo_api_client",
+                    ClientName = "Web requests for demo_api",
+                    ClientSecrets = {new Secret("secret".Sha256())}, // change me!
+
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RequirePkce = false,
+                    RequireClientSecret = false,
+
+                    RedirectUris = {"https://localhost:44305/signin-oidc"},
+                    PostLogoutRedirectUris = { "https://localhost:44305/signout-callback-oidc" },
+                    FrontChannelLogoutUri = "https://localhost:44305/signout-oidc",
+                    AllowedCorsOrigins = {"https://localhost:44305"},
+                    AllowedScopes = { "openid", "profile", "email", "phone" }    
                 },
             };
     }

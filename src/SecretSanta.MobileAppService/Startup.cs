@@ -20,7 +20,8 @@ namespace SecretSanta.MobileAppService
 {
 	public class Startup
 	{
-		public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        public IConfiguration Configuration { get; }
         
         public Startup(IConfiguration configuration)
         {
@@ -45,6 +46,17 @@ namespace SecretSanta.MobileAppService
             }).AddEntityFramework();
             //services.Configure<MailGunOptions>(Configuration.GetSection(MailGunOptions.MailGun));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://localhost:5001",
+                                          "http://localhost:5002",
+                                          "https://localhost:44305");
+                                  });
+            });
+
             services.AddMvc();
             services.AddAuthentication(options =>
             {
@@ -55,8 +67,9 @@ namespace SecretSanta.MobileAppService
                 .AddOpenIdConnect("oidc", options =>
                 {
                     options.Authority = "https://localhost:5001";
-                    options.ClientId = "interactive";
+                    options.ClientId = "demo_api_client";
                     options.MapInboundClaims = false;
+                    options.UsePkce = false;
                     options.SaveTokens = true;
                 });
             services.AddApplicationInsightsTelemetry();
@@ -110,7 +123,7 @@ namespace SecretSanta.MobileAppService
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
 

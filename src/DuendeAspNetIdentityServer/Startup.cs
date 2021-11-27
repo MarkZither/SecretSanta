@@ -32,14 +32,18 @@ namespace DuendeAspNetIdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyAllowSpecificOrigins,
-            //                      builder =>
-            //                      {
-            //                          builder.WithOrigins("https://localhost:44305", "http://localhost:5002");
-            //                      });
-            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://localhost:44305",
+                                          "http://localhost:5002",
+                                          "https://localhost:5001")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                                  });
+            });
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -82,7 +86,8 @@ namespace DuendeAspNetIdentityServer
 
                 return new DefaultCorsPolicyService(logger)
                 {
-                    AllowedOrigins = { "https://localhost:44305", "http://localhost:5002" }
+                    AllowedOrigins = { "https://localhost:44305", "http://localhost:5002", "https://localhost:5001", }
+                    ,AllowAll = true
                 };
             });
         }
@@ -98,7 +103,8 @@ namespace DuendeAspNetIdentityServer
             app.UseStaticFiles();
 
             app.UseRouting();
-            //app.UseCors(MyAllowSpecificOrigins);
+            // Must UseCors after Routing and before Authorization
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

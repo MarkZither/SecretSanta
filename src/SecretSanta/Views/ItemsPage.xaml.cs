@@ -4,12 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using SecretSanta.Models;
 using SecretSanta.Views;
 using SecretSanta.ViewModels;
+using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
+using System.Diagnostics;
+using System.Threading;
 
 namespace SecretSanta.Views
 {
@@ -98,6 +103,71 @@ namespace SecretSanta.Views
             {
                 viewModel.LoadItemsCommand.Execute(null);
             }
+        }
+
+        private async void Login_Clicked(object sender, EventArgs e)
+        {
+            //var authResult = await WebAuthenticator.AuthenticateAsync(
+            //    new Uri("https://localhost:5001/connect/authorize"),
+            //    new Uri("markzithersecretsanta://"));
+
+            //var accessToken = authResult?.AccessToken;
+
+            OidcClient oidcClient = CreateOidcClient();
+            LoginResult loginResult = await oidcClient.LoginAsync(new LoginRequest());
+        }
+
+        private OidcClient CreateOidcClient()
+        {
+            var options = new OidcClientOptions
+            {
+                Authority = "https://localhost:5001",// _authorityUrl,
+                ClientId = "demo_api_client", //_clientId,
+                Scope = "", //_scope,
+                RedirectUri = "markzithersecretsanta://callback", //_redirectUrl,
+                //ClientSecret = _clientSecret,
+                Browser = new WebAuthenticatorBrowser()
+            };
+
+            var oidcClient = new OidcClient(options);
+            return oidcClient;
+        }
+    }
+    internal class WebAuthenticatorBrowser : IBrowser
+    {
+        public async Task<BrowserResult> InvokeAsync(BrowserOptions options,
+               CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                WebAuthenticatorResult authResult =
+                    await WebAuthenticator.AuthenticateAsync(new Uri(options.StartUrl),
+                          new Uri(options.EndUrl));
+                var authorizeResponse = ToRawIdentityUrl(options.EndUrl, authResult);
+
+                return new BrowserResult
+                {
+                    Response = authorizeResponse
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return new BrowserResult()
+                {
+                    ResultType = BrowserResultType.UnknownError,
+                    Error = ex.ToString()
+                };
+            }
+        }
+
+        public string ToRawIdentityUrl(string redirectUrl, WebAuthenticatorResult result)
+        {
+            IEnumerable<string> parameters =
+                 result.Properties.Select(pair => $"{pair.Key}={pair.Value}");
+            var values = string.Join("&", parameters);
+
+            return $"{redirectUrl}#{values}";
         }
     }
 }

@@ -107,11 +107,11 @@ namespace SecretSanta.Views
 
         private async void Login_Clicked(object sender, EventArgs e)
         {
-            //var authResult = await WebAuthenticator.AuthenticateAsync(
-            //    new Uri("https://localhost:5001/connect/authorize"),
-            //    new Uri("markzithersecretsanta://"));
+            var authResult = await WebAuthenticator.AuthenticateAsync(
+                new Uri("https://localhost:5001/connect/authorize"),
+                new Uri("markzithersecretsanta://"));
 
-            //var accessToken = authResult?.AccessToken;
+            var accessToken = authResult?.AccessToken;
 
             OidcClient oidcClient = CreateOidcClient();
             LoginResult loginResult = await oidcClient.LoginAsync(new LoginRequest());

@@ -17,7 +17,7 @@ namespace SecretSanta
 		public App ()
 		{
 #if DEBUG
-            AzureBackendUrl = "https://127.0.0.1:44305";
+            AzureBackendUrl = "https://localhost:44305";
 #endif
             InitializeComponent();
 

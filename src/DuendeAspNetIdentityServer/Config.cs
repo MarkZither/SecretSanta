@@ -84,6 +84,22 @@ namespace DuendeAspNetIdentityServer
                     AllowedCorsOrigins = {"https://localhost:44305"},
                     AllowedScopes = { "openid", "profile", "email", "phone" }    
                 },
+                new Client
+                {
+                    ClientId = "demo_native_client",
+                    ClientName = "Web requests for demo_api",
+                    ClientSecrets = {new Secret("secret".Sha256())}, // change me!
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = false,
+                    RequireClientSecret = false,
+
+                    RedirectUris = {"markzithersecretsanta://callback"},
+                    PostLogoutRedirectUris = { "markzithersecretsanta://unauthorized" },
+                    FrontChannelLogoutUri = "https://localhost:44305/signout-oidc",
+                    AllowedCorsOrigins = {"https://localhost:44305"},
+                    AllowedScopes = { "openid", "profile", "email", "phone" }
+                },
             };
     }
 }

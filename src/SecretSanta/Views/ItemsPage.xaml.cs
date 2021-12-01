@@ -107,14 +107,22 @@ namespace SecretSanta.Views
 
         private async void Login_Clicked(object sender, EventArgs e)
         {
-            var authResult = await WebAuthenticator.AuthenticateAsync(
-                new Uri("https://localhost:5001/connect/authorize"),
-                new Uri("markzithersecretsanta://"));
+            try
+            {
+                var authResult = await WebAuthenticator.AuthenticateAsync(
+                    new Uri("https://localhost:5001/connect/authorize"),
+                    new Uri("markzithersecretsanta://callback"));
 
-            var accessToken = authResult?.AccessToken;
+                var accessToken = authResult?.AccessToken;
+            }
+            catch(Exception ex)
+            {
+                Debug.Write(ex);
+            }
 
             OidcClient oidcClient = CreateOidcClient();
-            LoginResult loginResult = await oidcClient.LoginAsync(new LoginRequest());
+            var loginRequest = new LoginRequest();
+            LoginResult loginResult = await oidcClient.LoginAsync(loginRequest);
         }
 
         private OidcClient CreateOidcClient()
@@ -122,7 +130,7 @@ namespace SecretSanta.Views
             var options = new OidcClientOptions
             {
                 Authority = "https://localhost:5001",// _authorityUrl,
-                ClientId = "demo_api_client", //_clientId,
+                ClientId = "demo_native_client", //_clientId,
                 Scope = "", //_scope,
                 RedirectUri = "markzithersecretsanta://callback", //_redirectUrl,
                 //ClientSecret = _clientSecret,

@@ -19,13 +19,13 @@ namespace SecretSanta.Services
         {
             
             var to = participants.GetShuffle();
-
+            int tried = 0;
             foreach (var from in participants.GetShuffle().GetPermutations())
             {
                 var result = to.ZipToKV(from);
                 var isValidPairings = false;
                 var tries = 1;
-                while (!isValidPairings && tries < 10)
+                while (!isValidPairings && tries < 2)
                 {
                     if (PairingIsValid(bannedPairings, result))
                     {
@@ -33,6 +33,7 @@ namespace SecretSanta.Services
                         return result.ToDictionary();
                     }
                     tries++;
+                    tried++;
                 }
             }
 

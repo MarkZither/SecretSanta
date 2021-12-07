@@ -60,6 +60,16 @@ namespace SecretSanta.Views
             var stef = viewModel.Items.Single(x => x.Name.Equals("Stef"));
             var di = viewModel.Items.Single(x => x.Name.Equals("Dianne"));
             var umark = viewModel.Items.Single(x => x.Name.Equals("Uncle Mark"));*/
+            var Christophe = viewModel.Items.Single(x => x.Name.Equals("Christophe Siuda"));
+            var Henni = viewModel.Items.Single(x => x.Name.Equals("Henni Wolter"));
+            var Thomas = viewModel.Items.Single(x => x.Name.Equals("Thomas Wolter"));
+            var Marina = viewModel.Items.Single(x => x.Name.Equals("Marina Wolter"));
+            var Deike = viewModel.Items.Single(x => x.Name.Equals("Deike Wolter"));
+            var Krispin = viewModel.Items.Single(x => x.Name.Equals("Krispin Wolter"));
+            var Heiner = viewModel.Items.Single(x => x.Name.Equals("Heiner Porrmann"));
+            var Marita = viewModel.Items.Single(x => x.Name.Equals("Marita Porrmann"));
+            var Stefan = viewModel.Items.Single(x => x.Name.Equals("Stefan Porrmann"));
+            var Martin = viewModel.Items.Single(x => x.Name.Equals("Martin Porrmann"));
             List<KeyValuePair<ParticipantDTO, ParticipantDTO>> banned = new List<KeyValuePair<ParticipantDTO, ParticipantDTO>>();
             Dictionary<ParticipantDTO, ParticipantDTO> banned2 = new Dictionary<ParticipantDTO, ParticipantDTO>();
             /*banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(mark, cai));
@@ -72,6 +82,40 @@ namespace SecretSanta.Views
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(umark, di));
             // add anyone who was the same for last 2 years
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, mum));*/
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Thomas));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Marina));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Deike));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Krispin));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Christophe));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Christophe, Henni));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Thomas, Marina));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Thomas, Deike));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Thomas, Krispin));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Thomas, Henni));            
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marina, Thomas));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marina, Deike));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marina, Krispin));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marina, Henni));            
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Deike, Thomas));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Deike, Marina));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Deike, Krispin));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Deike, Henni));            
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Krispin, Thomas));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Krispin, Marina));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Krispin, Deike));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Krispin, Henni));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Heiner, Marita));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Heiner, Stefan));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Heiner, Martin));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marita, Heiner));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marita, Stefan));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Marita, Martin));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Martin, Heiner));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Martin, Marita));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Martin, Stefan));            
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Stefan, Heiner));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Stefan, Marita));
+            //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Stefan, Martin));
             foreach (var item in viewModel.Items.Where(x => x.BannedParticipantId.HasValue))
             {
                 var recip = viewModel.Items.Single(x => x.Id.Equals(item.BannedParticipantId));

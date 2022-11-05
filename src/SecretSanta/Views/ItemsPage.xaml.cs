@@ -51,16 +51,16 @@ namespace SecretSanta.Views
 
         async void SantaItem_Clicked(object sender, EventArgs e)
         {
-            /*var mark = viewModel.Items.Single(x => x.Name.Equals("Mark"));
+            var mark = viewModel.Items.Single(x => x.Name.Equals("Mark"));
             var cai = viewModel.Items.Single(x => x.Name.Equals("Caitriona"));
             var clive = viewModel.Items.Single(x => x.Name.Equals("Clive"));
             var mum = viewModel.Items.Single(x => x.Name.Equals("Ann"));
             var sam = viewModel.Items.Single(x => x.Name.Equals("Sam"));
             var car = viewModel.Items.Single(x => x.Name.Equals("Caroline"));
             var stef = viewModel.Items.Single(x => x.Name.Equals("Stef"));
-            var di = viewModel.Items.Single(x => x.Name.Equals("Dianne"));
+            /*var di = viewModel.Items.Single(x => x.Name.Equals("Dianne"));
             var umark = viewModel.Items.Single(x => x.Name.Equals("Uncle Mark"));*/
-            var Christophe = viewModel.Items.Single(x => x.Name.Equals("Christophe Siuda"));
+            /*var Christophe = viewModel.Items.Single(x => x.Name.Equals("Christophe Siuda"));
             var Henni = viewModel.Items.Single(x => x.Name.Equals("Henni Wolter"));
             var Thomas = viewModel.Items.Single(x => x.Name.Equals("Thomas Wolter"));
             var Marina = viewModel.Items.Single(x => x.Name.Equals("Marina Wolter"));
@@ -69,20 +69,20 @@ namespace SecretSanta.Views
             var Heiner = viewModel.Items.Single(x => x.Name.Equals("Heiner Porrmann"));
             var Marita = viewModel.Items.Single(x => x.Name.Equals("Marita Porrmann"));
             var Stefan = viewModel.Items.Single(x => x.Name.Equals("Stefan Porrmann"));
-            var Martin = viewModel.Items.Single(x => x.Name.Equals("Martin Porrmann"));
+            var Martin = viewModel.Items.Single(x => x.Name.Equals("Martin Porrmann"));*/
             List<KeyValuePair<ParticipantDTO, ParticipantDTO>> banned = new List<KeyValuePair<ParticipantDTO, ParticipantDTO>>();
             Dictionary<ParticipantDTO, ParticipantDTO> banned2 = new Dictionary<ParticipantDTO, ParticipantDTO>();
-            /*banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(mark, cai));
+            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(mark, cai));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(cai, mark));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, sam));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(sam, clive));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(stef, car));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(car, stef));
-            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(di, umark));
+            /*banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(di, umark));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(umark, di));
             // add anyone who was the same for last 2 years
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(clive, mum));*/
-            banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Thomas));
+            /*banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Thomas));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Marina));
             banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Deike));
             //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Henni, Krispin));
@@ -116,6 +116,7 @@ namespace SecretSanta.Views
             //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Stefan, Heiner));
             //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Stefan, Marita));
             //banned.Add(new KeyValuePair<ParticipantDTO, ParticipantDTO>(Stefan, Martin));
+            */
             foreach (var item in viewModel.Items.Where(x => x.BannedParticipantId.HasValue))
             {
                 var recip = viewModel.Items.Single(x => x.Id.Equals(item.BannedParticipantId));

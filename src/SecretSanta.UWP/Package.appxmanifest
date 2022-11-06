@@ -63,7 +63,7 @@
   <Extensions>
     <Extension Category="windows.certificates">
       <Certificates>
-        <Certificate StoreName="trustedPeople" Content="localhost.pem"/>
+        <Certificate StoreName="trustedPeople"  Content="localhost.pem"/>
       </Certificates>
     </Extension>
   </Extensions>

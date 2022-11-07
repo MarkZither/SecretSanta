@@ -33,7 +33,8 @@ namespace SecretSanta.MobileAppService.Services
 
             Email.DefaultSender = sender;
             Email.DefaultRenderer = new RazorRenderer();
-            string subject = $"Dein Wichtelpartner ist...";
+            //string subject = $"Dein Wichtelpartner ist...";
+            string subject = $"Your secret santa selection";
 
             IFluentEmail email = null;
             try
@@ -42,7 +43,7 @@ namespace SecretSanta.MobileAppService.Services
                    .From("santa@secretsanta.mark-burton.com")
                    .To(toEmail, toName)
                    .Subject(subject)
-                   .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/EmailTemplate.de.cshtml", new { Name = givePresentTo, GifterName = toName });
+                   .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/EmailTemplate.cshtml", new { Name = givePresentTo, GifterName = toName });
             }
             catch (TemplateCompilationException tex)
             {

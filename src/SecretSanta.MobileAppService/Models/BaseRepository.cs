@@ -15,7 +15,7 @@ namespace SecretSanta.Models
         {
             get
             {
-                return Environment.CurrentDirectory + "\\db\\secretsantachris.db";
+                return Environment.CurrentDirectory + "\\db\\secretsanta.db";
             }
         }
 

@@ -42,6 +42,7 @@
     <NewtonsoftVersion>12.0.3</NewtonsoftVersion>
     <NLogVersion>4.7.4</NLogVersion>
     <NLogWebVersion>4.9.3</NLogWebVersion>
+    <UnoVersion>4.0.0</UnoVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">

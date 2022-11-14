@@ -167,9 +167,6 @@ namespace SecretSanta.Uno
             });
 
             global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
-#if HAS_UNO
-  global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
-#endif
         }
     }
 }

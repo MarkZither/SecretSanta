@@ -23,6 +23,9 @@ namespace SecretSanta.Uno
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        /// <summary>
+        /// Main page
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();

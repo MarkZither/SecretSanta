@@ -4,6 +4,9 @@ using Windows.UI.Xaml;
 
 namespace SecretSanta.Uno.Wasm
 {
+    /// <summary>
+    /// Entry point to the Uno wasm app.
+    /// </summary>
     public class Program
     {
         private static App _app;

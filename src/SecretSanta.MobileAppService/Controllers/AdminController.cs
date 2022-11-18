@@ -36,7 +36,7 @@ namespace SecretSanta.Controllers
             using (MiniProfiler.Current.Step("Getting List of Participants"))
             {
                 _logger.LogDebug(EventIds.TestingDebugLogging, "Testing logging in controller");
-                return ParticipantRepository.GetAll();
+                return await Task.Run(() => ParticipantRepository.GetAll());
             }
         }
     }

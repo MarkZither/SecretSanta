@@ -2,7 +2,9 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": "a8ea9d5c-1b4f-4935-993d-bd439ef7b11e",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -132,6 +134,5 @@
         }
       }
     }
-  },
-  "defaultProject": "SecretSanta"
+  }
 }

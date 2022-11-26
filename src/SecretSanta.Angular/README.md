@@ -41,3 +41,7 @@ Basic logging service added based on [Logging in Angular Application](https://th
 
 To avoid imports with `../` and worse and to make everything ready to split out to libraries use  [paths](https://stackoverflow.com/questions/50679031/tsconfig-paths-not-working) to turn
 `'../shared/logger.service'` into `'@app/shared/logger.service'`.
+
+## AuthGuard
+
+Prevent access to profile to unauthenticated users with and AuthGuard https://kirjai.com/dynamic-guard-redirects-angular/

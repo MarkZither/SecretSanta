@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoggerService } from '../shared/logger.service';
 
 @Component({
   selector: 'app-santa',
@@ -6,7 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./santa.component.scss']
 })
 export class SantaComponent {
+
+  constructor(private logger: LoggerService) {}
+
   generate(): void {
-    console.log("generating");
+    this.logger.info("generating");
   }
 }

@@ -33,4 +33,6 @@ The project structure is based on [https://angular.io/guide/styleguide#folders-b
 * https://medium.com/@shijin_nath/angular-right-file-structure-and-best-practices-that-help-to-scale-2020-52ce8d967df5
 * https://blogs.halodoc.io/angular-best-practices/
 
+## Logging
 
+Basic logging service added based on [Logging in Angular Application](https://thesiddharthraghuvanshi.medium.com/logging-in-angular-application-angular-logger-service-8bc90096dcf6) to add a logging service with colour coded logging to console, to be extended in future to log to the backend or hosted service like logz.io.

@@ -36,3 +36,8 @@ The project structure is based on [https://angular.io/guide/styleguide#folders-b
 ## Logging
 
 Basic logging service added based on [Logging in Angular Application](https://thesiddharthraghuvanshi.medium.com/logging-in-angular-application-angular-logger-service-8bc90096dcf6) to add a logging service with colour coded logging to console, to be extended in future to log to the backend or hosted service like logz.io.
+
+## Using the tsconfig paths
+
+To avoid imports with `../` and worse and to make everything ready to split out to libraries use  [paths](https://stackoverflow.com/questions/50679031/tsconfig-paths-not-working) to turn
+`'../shared/logger.service'` into `'@app/shared/logger.service'`.

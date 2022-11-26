@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoggerService } from '../shared/logger.service';
+import { LoggerService } from '@app/shared/logger.service'
 
 @Component({
   selector: 'app-santa',
@@ -12,5 +12,6 @@ export class SantaComponent {
 
   generate(): void {
     this.logger.info("generating");
+    this.logger.error("Generating Failed, implement the service");
   }
 }

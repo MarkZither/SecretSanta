@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LogLevel } from './logLevel.model';
+import { LogLevel } from '@app/shared/logLevel.model';
 
 @Injectable({
   providedIn: 'root',

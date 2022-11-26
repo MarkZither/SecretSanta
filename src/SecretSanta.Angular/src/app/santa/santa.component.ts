@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./santa.component.scss']
 })
 export class SantaComponent {
-
+  generate(): void {
+    console.log("generating");
+  }
 }

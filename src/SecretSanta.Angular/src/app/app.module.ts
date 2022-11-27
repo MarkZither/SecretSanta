@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { SantaComponent } from './santa/santa.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from '@app/core/services/auth.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SantaComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

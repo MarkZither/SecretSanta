@@ -45,3 +45,8 @@ To avoid imports with `../` and worse and to make everything ready to split out 
 ## AuthGuard
 
 Prevent access to profile to unauthenticated users with and AuthGuard https://kirjai.com/dynamic-guard-redirects-angular/
+
+## Environment Service
+https://www.jvandemo.com/how-to-use-environment-variables-to-configure-your-angular-application-without-a-rebuild/
+
+https://pumpingco.de/blog/environment-variables-angular-docker/

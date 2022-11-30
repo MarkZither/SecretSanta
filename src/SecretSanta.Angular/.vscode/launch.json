@@ -8,6 +8,7 @@
             "type": "msedge",
             "request": "launch",
             "name": "Launch Edge against localhost",
+            "preLaunchTask": "npm: start", // task of task.json
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}"
         }

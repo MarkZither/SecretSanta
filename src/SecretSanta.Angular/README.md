@@ -26,12 +26,50 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Setting up VS Code debugging
+
+It seems like VS Code will generate launch.json with various configurations, such as `Launch Edge against localhost` which will debug a running application, but doesn't have a combined build/run and debug. Adding a preLaunchTask and related tasks.json can achieve that as described in [Debug angular like PRO](https://medium.com/@iReal_Nirmal/debug-angular-like-pro-with-visual-studio-code-54522ca923f1).
+
+Using the exact task definition in the article caused errors like
+
+``` node
+Error: the pattern property tsc is not a valid pattern variable name.
+Error: the description can't be converted into a problem matcher:
+```
+
+I had success with the following reduced task definition
+
+``` json
+{
+ "version": "2.0.0",
+ "tasks": [
+  {
+   "type": "npm",
+   "script": "start",
+   "isBackground":true,
+   "presentation":{
+    "focus":true,
+    "panel":"dedicated"
+   },
+   "problemMatcher": "$tsc",
+   "label": "npm: start",
+   "detail": "ng serve",
+   "group": {
+    "kind": "build",
+    "isDefault": true
+   }
+  }
+ ]
+}
+```
+
 ## Project Structure
 
 The project structure is based on [https://angular.io/guide/styleguide#folders-by-feature-structure](https://angular.io/guide/styleguide#folders-by-feature-structure) best practices gleaned from:
-* https://stackoverflow.com/questions/56938106/angular-project-structure-for-enterprise-projects
-* https://medium.com/@shijin_nath/angular-right-file-structure-and-best-practices-that-help-to-scale-2020-52ce8d967df5
-* https://blogs.halodoc.io/angular-best-practices/
+
+* <https://stackoverflow.com/questions/56938106/angular-project-structure-for-enterprise-projects>
+* <https://medium.com/@shijin_nath/angular-right-file-structure-and-best-practices-that-help-to-scale-2020-52ce8d967df5>
+* <https://blogs.halodoc.io/angular-best-practices/>
 
 ## Logging
 
@@ -44,9 +82,11 @@ To avoid imports with `../` and worse and to make everything ready to split out 
 
 ## AuthGuard
 
-Prevent access to profile to unauthenticated users with and AuthGuard https://kirjai.com/dynamic-guard-redirects-angular/
+Prevent access to profile to unauthenticated users with and AuthGuard <https://kirjai.com/dynamic-guard-redirects-angular/>
 
 ## Environment Service
-https://www.jvandemo.com/how-to-use-environment-variables-to-configure-your-angular-application-without-a-rebuild/
 
-https://pumpingco.de/blog/environment-variables-angular-docker/
+So that this app can be built once and deployed to multiple environments it uses the environment service to load the apirurl at runtime rather than define it at build time.
+<https://www.jvandemo.com/how-to-use-environment-variables-to-configure-your-angular-application-without-a-rebuild/>
+
+<https://pumpingco.de/blog/environment-variables-angular-docker/>

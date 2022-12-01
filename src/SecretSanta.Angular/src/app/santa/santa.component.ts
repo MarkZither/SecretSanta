@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EnvService } from '@app/shared/env.service';
 import { LoggerService } from '@app/shared/logger.service'
 
 @Component({
@@ -8,10 +9,11 @@ import { LoggerService } from '@app/shared/logger.service'
 })
 export class SantaComponent {
 
-  constructor(private logger: LoggerService) {}
+  constructor(private logger: LoggerService, private env: EnvService) {}
 
   generate(): void {
     this.logger.info("generating");
+    this.logger.info(this.env.apiUrl);
     this.logger.error("Generating Failed, implement the service");
   }
 }

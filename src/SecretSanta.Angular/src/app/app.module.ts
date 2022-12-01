@@ -7,6 +7,7 @@ import { SantaComponent } from './santa/santa.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from '@app/core/services/auth.service';
 import { LoginComponent } from './login/login.component';
+import { EnvServiceProvider } from '@app/shared/env.service.provider';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, EnvServiceProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

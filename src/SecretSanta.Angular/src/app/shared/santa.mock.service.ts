@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ISantaService } from './santa';
+import { ConcreteSantaService, ISantaService } from './santa';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SantaMockService implements ISantaService {
-
-  constructor() { }
+export class SantaMockService extends ConcreteSantaService implements ISantaService {
+  something: string | undefined;
+  generate() {
+      this.something = 'sdfsdf';
+  }
 }

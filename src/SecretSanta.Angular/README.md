@@ -12,7 +12,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artefacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
@@ -86,7 +86,19 @@ Prevent access to profile to unauthenticated users with and AuthGuard <https://k
 
 ## Environment Service
 
-So that this app can be built once and deployed to multiple environments it uses the environment service to load the apirurl at runtime rather than define it at build time.
-<https://www.jvandemo.com/how-to-use-environment-variables-to-configure-your-angular-application-without-a-rebuild/>
+So that this app can be built once and deployed to multiple environments it uses the environment service to load the apiurl at runtime rather than define it at build time.
 
-<https://pumpingco.de/blog/environment-variables-angular-docker/>
+A solution I have used before is explained by [Jurgen Van de Moere](https://www.jvandemo.com/how-to-use-environment-variables-to-configure-your-angular-application-without-a-rebuild/), recently this has started to cause errors like
+
+``` bash
+Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'EnvService'.
+  No index signature with a parameter of type 'string' was found on type 'EnvService'.
+```
+
+This can be fixed with `// @ts-ignore` or moving to [accessing object property dynamically in TypeScript](https://bobbyhadz.com/blog/typescript-access-object-property-dynamically)
+
+Taking it a bit further you can use `envsubst` to [Dynamically set Angular Environment Variables in Docker](https://pumpingco.de/blog/environment-variables-angular-docker/).
+
+## Other Resources
+[12 Factor app](https://github.com/rfreedman/angular-configuration-service)
+[Angular Book](https://angular-book.dev/)

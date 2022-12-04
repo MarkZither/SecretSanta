@@ -8,6 +8,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from '@app/core/services/auth.service';
 import { LoginComponent } from './login/login.component';
 import { EnvServiceProvider } from '@app/shared/env.service.provider';
+import { ConcreteSantaService } from '@app/shared/santa'
+import { isMainThread } from 'worker_threads';
+import { SantaFactory } from './shared/santa.provider';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { EnvServiceProvider } from '@app/shared/env.service.provider';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AuthService, EnvServiceProvider],
+  providers: [AuthService, 
+    EnvServiceProvider, 
+    {provide: ConcreteSantaService, useFactory: SantaFactory}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

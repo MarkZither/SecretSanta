@@ -3,3 +3,7 @@
 <button type="button" class="generate-button" (click)="generate();">
     Generate Matches
 </button>
+
+<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+    <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+</div>

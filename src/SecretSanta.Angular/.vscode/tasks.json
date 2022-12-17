@@ -9,13 +9,26 @@
 				"focus":true,
 				"panel":"dedicated"
 			},
-			"problemMatcher": "$tsc",
 			"label": "npm: start",
 			"detail": "ng serve",
 			"group": {
 				"kind": "build",
 				"isDefault": true
-			}
+			},
+			"problemMatcher": [
+				{
+				  "base": "$tsc",
+				  "pattern": {
+					"regexp": "^(Error: )?([^\\s].*)[\\(:](\\d+)[,:](\\d+)(?:\\):\\s+|\\s+-\\s+)(error|warning|info)\\s+TS(\\d+)\\s*:\\s*(.*)$",
+					"file": 2,
+					"line": 3,
+					"column": 4,
+					"severity": 5,
+					"code": 6,
+					"message": 7
+				  }
+				}
+			  ],
 		}
 	]
 }

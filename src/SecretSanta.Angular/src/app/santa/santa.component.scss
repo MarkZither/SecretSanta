@@ -11,3 +11,12 @@
     font-weight: bold;
     font-size: 20px;
   }
+
+.results {
+  display: none;
+  background-color: #3b488f;
+  }
+
+  .results.results-opened {
+  display: flex;
+  }

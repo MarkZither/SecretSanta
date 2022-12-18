@@ -30,8 +30,11 @@ import { ConcreteSantaService } from '@app/shared/santa';
   templateUrl: './santa.component.html',
   styleUrls: ['./santa.component.scss']
 })
+
 export class SantaComponent {
   isOpen = true;
+  public resultsOpened = false;
+  matches = ['First', 'Second', 'Third'];
 
   constructor(private logger: LoggerService, private env: EnvService, private santaService: ConcreteSantaService) {}
 
@@ -44,5 +47,6 @@ export class SantaComponent {
     setTimeout(() => {
       this.isOpen = !this.isOpen;
     }, 2000);
+    this.resultsOpened = true;
   }
 }

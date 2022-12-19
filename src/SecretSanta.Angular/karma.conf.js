@@ -2,6 +2,8 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
+  const { chromium } = require('@playwright/test');
+  process.env.CHROME_BIN = chromium.executablePath();
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],

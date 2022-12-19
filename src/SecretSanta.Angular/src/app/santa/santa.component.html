@@ -6,4 +6,12 @@
 
 <div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
     <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+    <div id="results" [ngClass]="{ 'results-opened': resultsOpened }" class="results">
+        test test test
+        <ul>
+            <li *ngFor="let match of matches; index as i; first as isFirst">
+                {{i}}/{{matches.length}}. {{match}} <span *ngIf="isFirst">default</span>
+            </li>
+        </ul>
+    </div>
 </div>

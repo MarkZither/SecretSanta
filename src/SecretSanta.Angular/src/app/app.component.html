@@ -326,7 +326,13 @@
       </svg>
     </a>
 </div>
-
+<nav>
+  <ul>
+    <li><a routerLink="/santa" routerLinkActive="active" ariaCurrentWhenActive="page">Santa</a></li>
+    <li><a routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">Profile</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
 <div class="content" role="main">
 
   <!-- Highlight Card -->
@@ -512,4 +518,3 @@
 
 
 
-<router-outlet></router-outlet>

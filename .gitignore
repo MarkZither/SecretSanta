@@ -262,3 +262,4 @@ __pycache__/
 /src/SecretSanta.MobileAppService/db/*.db
 *.db-wal
 *.db-shm
+/src/SecretSanta.Angular/.angular/cache/

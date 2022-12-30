@@ -1,0 +1,72 @@
+[
+    {
+      "id": 1,
+      "name": "Mark",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "mark.b@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    },
+    {
+      "id": 2,
+      "name": "Caitriona",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "caitrionaf@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    },
+    {
+      "id": 3,
+      "name": "Ann",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "caitrionaf@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    },
+    {
+      "id": 4,
+      "name": "Clive",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "mark.b@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    },
+    {
+      "id": 5,
+      "name": "Sam",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "mark.b@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    },
+    {
+      "id": 6,
+      "name": "Caroline",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "mark.b@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    },
+    {
+      "id": 7,
+      "name": "Stef",
+      "userId": "71A32736-7B5B-4020-86F4-CCBF529802CE",
+      "email": "mark.b@test.com",
+      "suggestions": null,
+      "historyRecipients": null,
+      "historyGifters": null,
+      "bannedParticipantId": null
+    }
+  ]

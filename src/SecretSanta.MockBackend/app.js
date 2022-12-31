@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,6 +9,9 @@ var usersRouter = require('./routes/users');
 var participantsRouter = require('./routes/participants');
 
 var app = express();
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 const port = 5500
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -20,6 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/participants', participantsRouter);
+app.use('/api/participant', participantsRouter);
 
 module.exports = app;

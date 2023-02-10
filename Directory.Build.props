@@ -27,8 +27,8 @@
 
   <!-- NuGet dependencies shared across projects -->
   <PropertyGroup>
-    <MicrosoftAspNetCorePackageVersion>7.0.1</MicrosoftAspNetCorePackageVersion>
-    <MicrosoftEntityFrameworkCorePackageVersion>7.0.1</MicrosoftEntityFrameworkCorePackageVersion>
+    <MicrosoftAspNetCorePackageVersion>7.0.2</MicrosoftAspNetCorePackageVersion>
+    <MicrosoftEntityFrameworkCorePackageVersion>7.0.2</MicrosoftEntityFrameworkCorePackageVersion>
     <MicrosoftExtensionsPackageVersion>7.0.0</MicrosoftExtensionsPackageVersion>
     <AspNetCoreHealthChecksVersion>6.0.5</AspNetCoreHealthChecksVersion>
     <AspNetCoreHealthChecksSqlServerVersion>6.0.2</AspNetCoreHealthChecksSqlServerVersion>

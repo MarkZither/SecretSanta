@@ -35,7 +35,7 @@
     <AspNetCoreHealthChecksIdSrvVersion>6.0.2</AspNetCoreHealthChecksIdSrvVersion>
     <AspNetCoreHealthChecksUIVersion>6.0.5</AspNetCoreHealthChecksUIVersion>
     <AspNetCoreHealthChecksUIClientVersion>6.0.5</AspNetCoreHealthChecksUIClientVersion>
-    <SwashbuckleVersion>5.6.0</SwashbuckleVersion>
+    <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
     <ServicesSharedVersion>1.1.1-prerelease</ServicesSharedVersion>
     <NewtonsoftVersion>13.0.1</NewtonsoftVersion>
     <UnoVersion>4.6.19</UnoVersion>

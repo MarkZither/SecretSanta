@@ -38,7 +38,6 @@
     <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
     <ServicesSharedVersion>1.1.1-prerelease</ServicesSharedVersion>
     <NewtonsoftVersion>13.0.1</NewtonsoftVersion>
-    <UnoVersion>4.6.19</UnoVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">

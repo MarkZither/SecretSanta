@@ -36,8 +36,7 @@
     <AspNetCoreHealthChecksUIVersion>6.0.5</AspNetCoreHealthChecksUIVersion>
     <AspNetCoreHealthChecksUIClientVersion>6.0.5</AspNetCoreHealthChecksUIClientVersion>
     <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
-    <ServicesSharedVersion>1.1.1-prerelease</ServicesSharedVersion>
-    <NewtonsoftVersion>13.0.1</NewtonsoftVersion>
+    <NewtonsoftVersion>13.0.3</NewtonsoftVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">

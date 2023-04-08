@@ -21,6 +21,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Company>ZitherIT</Company>
+    <Copyright>Copyright ©  2023</Copyright>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <DebugType>portable</DebugType>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>

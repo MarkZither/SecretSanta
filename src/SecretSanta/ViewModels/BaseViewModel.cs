@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
 using SecretSanta.Models;
 using SecretSanta.Services;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 
 namespace SecretSanta.ViewModels
 {

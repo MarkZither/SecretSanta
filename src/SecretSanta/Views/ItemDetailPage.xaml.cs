@@ -1,10 +1,9 @@
 ﻿using System;
 
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using SecretSanta.Models;
 using SecretSanta.ViewModels;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 
 namespace SecretSanta.Views
 {

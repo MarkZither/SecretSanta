@@ -1,8 +1,8 @@
 ﻿using System;
-using Xamarin.Forms;
 using SecretSanta.Services;
 using SecretSanta.Views;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 
 //[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace SecretSanta

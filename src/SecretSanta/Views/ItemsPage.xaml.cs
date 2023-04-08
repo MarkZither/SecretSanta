@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using SecretSanta.Models;
 using SecretSanta.Views;
 using SecretSanta.ViewModels;
@@ -15,6 +11,9 @@ using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using IBrowser = IdentityModel.OidcClient.Browser.IBrowser;
 
 namespace SecretSanta.Views
 {

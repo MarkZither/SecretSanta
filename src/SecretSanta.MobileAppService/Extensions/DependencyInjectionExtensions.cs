@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Linq;
 using SecretSanta.MobileAppService.Options;
-using SecretSanta.Services;
 
 namespace SecretSanta.MobileAppService.Extensions
 {

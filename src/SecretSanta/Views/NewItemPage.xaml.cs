@@ -5,6 +5,7 @@ using SecretSanta.Models;
 using SecretSanta.ViewModels;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace SecretSanta.Views
 {
@@ -22,7 +23,7 @@ namespace SecretSanta.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", viewModel.Item);
+            WeakReferenceMessenger.Default.Send<ParticipantDTO>(viewModel.Item);
             await Navigation.PopModalAsync();
         }
     }

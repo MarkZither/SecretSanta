@@ -7,6 +7,7 @@ using SecretSanta.Models;
 using SecretSanta.Views;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace SecretSanta.ViewModels
 {
@@ -21,9 +22,9 @@ namespace SecretSanta.ViewModels
             Items = new ObservableCollection<ParticipantDTO>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, ParticipantDTO>(this, "AddItem", async (obj, item) =>
+            WeakReferenceMessenger.Default.Register<ParticipantDTO>(this, async (r, m) =>
             {
-                var _item = item as ParticipantDTO;
+                var _item = m;
                 Items.Add(_item);
                 await DataStore.AddItemAsync(_item);
             });

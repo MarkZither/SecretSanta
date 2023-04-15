@@ -6,7 +6,7 @@ using SecretSanta.MobileAppService.Options;
 namespace SecretSanta
 {
     /// <summary>
-    /// Validates BaGet's options, used at startup.
+    /// Validates SecretSanta's options, used at startup.
     /// </summary>
     public class ValidateStartupOptions : IValidateStartupOptions
     {

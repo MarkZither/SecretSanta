@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <Product>BaGet</Product>
+    <Product>SecretSanta</Product>
 
     <PackageVersion Condition="'$(PackageVersion)' == ''">1.1.1-prerelease</PackageVersion>
     <PackageProjectUrl>https://github.com/MarkZither/SecretSanta</PackageProjectUrl>

@@ -11,8 +11,8 @@ using SecretSanta.MobileAppService.Options;
 namespace SecretSanta
 {
     /// <summary>
-    /// BaGet's options configuration, specific to the default BaGet application.
-    /// Don't use this if you are embedding BaGet into your own custom ASP.NET Core application.
+    /// SecretSanta's options configuration, specific to the default SecretSanta application.
+    /// Don't use this if you are embedding SecretSanta into your own custom ASP.NET Core application.
     /// </summary>
     public class ConfigureSantaOptions
         : IConfigureOptions<CorsOptions>

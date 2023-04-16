@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using SecretSanta.Extentions;
+using SecretSanta.Extensions;
 
-namespace SecretSanta.Services
+namespace SecretSanta.Shared
 {
     public static class SecretSantaGenerator
     {

@@ -123,7 +123,7 @@ namespace SecretSanta.Views
             }
             try
             {
-                var res = SecretSanta.Services.SecretSantaGenerator.Generate(viewModel.Items, banned);
+                var res = SecretSanta.Shared.SecretSantaGenerator.Generate(viewModel.Items, banned);
                 StringBuilder sb = new StringBuilder();
                 foreach (var item in res)
                 {

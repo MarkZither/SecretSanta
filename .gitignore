@@ -263,3 +263,4 @@ __pycache__/
 *.db-wal
 *.db-shm
 /src/SecretSanta.Angular/.angular/cache/
+/src/DuendeAspNetIdentityServer/keys

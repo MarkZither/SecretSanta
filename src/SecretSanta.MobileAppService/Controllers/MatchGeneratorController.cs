@@ -17,7 +17,7 @@ namespace SecretSanta.MobileAppService.Controllers {
         public async Task<IActionResult> PostAsync([FromBody] MatchGeneratorModel model) {
             var res = SecretSanta.Shared.SecretSantaGenerator.Generate(model.Participants, model.BannedPairs);
             
-            return Ok();
+            return await Task.FromResult<OkResult>(Ok());
         }
     }
 

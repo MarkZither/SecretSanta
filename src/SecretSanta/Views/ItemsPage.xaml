@@ -50,7 +50,7 @@
                     <Label
                 Text="Welcome to Secret Santa!"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                SemanticProperties.Description="Welcome to Secret Santa!"
                 FontSize="18"
                 HorizontalOptions="Center" />
 

@@ -25,5 +25,16 @@
                 </OnPlatform>
             </NavigationPage.IconImageSource>
         </NavigationPage>
+
+        <NavigationPage Title="What?!?!?!?">
+            <x:Arguments>
+                <views:AboutPage />
+            </x:Arguments>
+            <NavigationPage.IconImageSource>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_about.png"/>
+                </OnPlatform>
+            </NavigationPage.IconImageSource>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>

@@ -1,14 +1,22 @@
 ﻿@page "/santa"
-@attribute [StreamRendering(true)]
+@* @attribute [StreamRendering(true)] *@
+@attribute [RenderModeServer]
 
 <PageTitle>Secret Santa Generator</PageTitle>
 
 <h1>Secret Santa Generator</h1>
 
-@code {
+<p role="status" class="@(ShouldShowStatus ? "d-show" : "d-none")">It's Done! Check your email!</p>
+<button class="btn btn-primary" @onclick="GenerateMatches">Generate</button>
 
+@code {
+    private bool ShouldShowStatus { get; set; } = false;
     protected override async Task OnInitializedAsync()
     {
 
+    }
+
+    private void GenerateMatches() {
+        ShouldShowStatus = true;
     }
 }

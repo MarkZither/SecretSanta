@@ -8,15 +8,33 @@
 
 <p role="status" class="@(ShouldShowStatus ? "d-show" : "d-none")">It's Done! Check your email!</p>
 <button class="btn btn-primary" @onclick="GenerateMatches">Generate</button>
-
+    @foreach (var nickname in Nicknames) {
+    <li @key=nickname>
+        @nickname
+        <a @onclick="() => RemoveNickname(nickname)">Remove</a>
+    </li>
+}
 @code {
     private bool ShouldShowStatus { get; set; } = false;
+
+    [Parameter]
+    public List<string> Nicknames { get; set; } = new List<string>();
+
+    [Parameter]
+    public EventCallback<List<string>> NicknamesChanged { get; set; }
     protected override async Task OnInitializedAsync()
     {
-
+        Nicknames.Add("Mark");
+        Nicknames.Add("Caitríona");
+        Nicknames.Add("Bruce");
     }
 
     private void GenerateMatches() {
         ShouldShowStatus = true;
+    }
+
+    public async Task RemoveNickname(string nickname) {
+        Nicknames.Remove(nickname);
+        await NicknamesChanged.InvokeAsync(Nicknames);
     }
 }

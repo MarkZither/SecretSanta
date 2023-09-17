@@ -7,15 +7,21 @@
 <h1>Secret Santa Generator</h1>
 
 <p role="status" class="@(ShouldShowStatus ? "d-show" : "d-none")">It's Done! Check your email!</p>
-<button class="btn btn-primary" @onclick="GenerateMatches">Generate</button>
+
+<input @bind="txtNewName" />
+<button class="btn btn-primary" @onclick="AddName">Add Name</button>
     @foreach (var nickname in Nicknames) {
     <li @key=nickname>
         @nickname
         <a @onclick="() => RemoveNickname(nickname)">Remove</a>
     </li>
 }
+
+<button class="btn btn-primary" @onclick="GenerateMatches">Generate</button>
+
 @code {
     private bool ShouldShowStatus { get; set; } = false;
+    private string? txtNewName { get; set; }
 
     [Parameter]
     public List<string> Nicknames { get; set; } = new List<string>();
@@ -35,6 +41,12 @@
 
     public async Task RemoveNickname(string nickname) {
         Nicknames.Remove(nickname);
+        await NicknamesChanged.InvokeAsync(Nicknames);
+    }
+
+    private async Task AddName(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    {
+        Nicknames.Add(txtNewName);
         await NicknamesChanged.InvokeAsync(Nicknames);
     }
 }

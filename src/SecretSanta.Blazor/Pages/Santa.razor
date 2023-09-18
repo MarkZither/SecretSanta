@@ -8,7 +8,11 @@
 
 <p role="status" class="@(ShouldShowStatus ? "d-show" : "d-none")">It's Done! Check your email!</p>
 
-<input @bind="txtNewName" />
+<div>
+    <label>
+        <InputText @bind-Value="txtNewName" />
+    </label>
+</div>
 <button class="btn btn-primary" @onclick="AddName">Add Name</button>
     @foreach (var nickname in Nicknames) {
     <li @key=nickname>
@@ -21,7 +25,7 @@
 
 @code {
     private bool ShouldShowStatus { get; set; } = false;
-    private string? txtNewName { get; set; }
+    private string? txtNewName { get; set; } = string.Empty;
 
     [Parameter]
     public List<string> Nicknames { get; set; } = new List<string>();

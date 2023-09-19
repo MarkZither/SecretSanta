@@ -1,6 +1,7 @@
 ﻿@page "/santa"
 @* @attribute [StreamRendering(true)] *@
 @attribute [RenderModeServer]
+@inject ILogger<Santa> Logger
 
 <PageTitle>Secret Santa Generator</PageTitle>
 
@@ -9,11 +10,19 @@
 <p role="status" class="@(ShouldShowStatus ? "d-show" : "d-none")">It's Done! Check your email!</p>
 
 <div>
-    <label>
-        <InputText @bind-Value="txtNewName" />
-    </label>
+    <EditForm Model="@Model" OnValidSubmit="@AddName">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <label> Name:
+            <InputText @bind-Value="Model!.Name" />
+        </label>
+        <label> Email:
+            <InputText @bind-Value="Model!.Email" />
+        </label>
+        <button class="btn btn-primary">Add Name</button>
+    </EditForm>
 </div>
-<button class="btn btn-primary" @onclick="AddName">Add Name</button>
+
     @foreach (var nickname in Nicknames) {
     <li @key=nickname>
         @nickname
@@ -24,8 +33,9 @@
 <button class="btn btn-primary" @onclick="GenerateMatches">Generate</button>
 
 @code {
+    private EditContext? editContext;
     private bool ShouldShowStatus { get; set; } = false;
-    private string? txtNewName { get; set; } = string.Empty;
+    public NewParticipant? Model { get; set; }
 
     [Parameter]
     public List<string> Nicknames { get; set; } = new List<string>();
@@ -34,6 +44,8 @@
     public EventCallback<List<string>> NicknamesChanged { get; set; }
     protected override async Task OnInitializedAsync()
     {
+        Model ??= new();
+        editContext = new(Model);
         Nicknames.Add("Mark");
         Nicknames.Add("Caitríona");
         Nicknames.Add("Bruce");
@@ -48,9 +60,14 @@
         await NicknamesChanged.InvokeAsync(Nicknames);
     }
 
-    private async Task AddName(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    private async Task AddName()
     {
-        Nicknames.Add(txtNewName);
+        if (editContext != null && editContext.Validate()) {
+        Nicknames.Add(Model.Name);
         await NicknamesChanged.InvokeAsync(Nicknames);
+        }
+        else {
+            Logger.LogInformation("Submit called: Form is INVALID");
+        }
     }
 }

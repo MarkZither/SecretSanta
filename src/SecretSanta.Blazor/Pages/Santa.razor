@@ -44,7 +44,7 @@
     public EventCallback<List<string>> NicknamesChanged { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        Model ??= new();
+        Model ??= new NewParticipant(string.Empty, string.Empty );
         editContext = new(Model);
         Nicknames.Add("Mark");
         Nicknames.Add("Caitríona");

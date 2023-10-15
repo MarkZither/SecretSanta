@@ -43,7 +43,9 @@ namespace SecretSanta.Services
         public async Task<bool> UpdateItemAsync(ParticipantDTO item)
         {
             var _item = items.Where((ParticipantDTO arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
+            if (_item is not null) {
+                items.Remove(_item);
+            }
             items.Add(item);
 
             return await Task.FromResult(true);
@@ -52,14 +54,15 @@ namespace SecretSanta.Services
         public async Task<bool> DeleteItemAsync(int id)
         {
             var _item = items.Where((ParticipantDTO arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(_item);
-
+            if (_item is not null) {
+                items.Remove(_item);
+            }
             return await Task.FromResult(true);
         }
 
         public async Task<ParticipantDTO> GetItemAsync(int id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id) ?? new ParticipantDTO());
         }
 
         public async Task<IEnumerable<ParticipantDTO>> GetItemsAsync(bool forceRefresh = false)

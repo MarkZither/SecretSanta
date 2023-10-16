@@ -41,7 +41,7 @@ namespace SecretSanta.Services
 				return await Task.Run(() => JsonConvert.DeserializeObject<Message>(json));
 			}
 
-			return null;
+			return await Task.FromResult(new Message());
 		}
 
 		public async Task<bool> AddItemAsync(Message item)

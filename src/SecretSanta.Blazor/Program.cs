@@ -6,7 +6,7 @@ namespace SecretSanta.Blazor {
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
-                .AddServerComponents();
+                .AddInteractiveServerComponents();
 
             var app = builder.Build();
 
@@ -18,6 +18,7 @@ namespace SecretSanta.Blazor {
             }
 
             app.UseHttpsRedirection();
+            app.UseAntiforgery();
 
             app.UseStaticFiles();
 

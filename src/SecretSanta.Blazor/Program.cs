@@ -22,7 +22,8 @@ namespace SecretSanta.Blazor {
 
             app.UseStaticFiles();
 
-            app.MapRazorComponents<App>();
+            app.MapRazorComponents<App>()
+                .AddInteractiveServerRenderMode();
 
             app.Run();
         }

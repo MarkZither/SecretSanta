@@ -264,3 +264,4 @@ __pycache__/
 *.db-shm
 /src/SecretSanta.Angular/.angular/cache/
 /src/DuendeAspNetIdentityServer/keys
+*.sqbpro

@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Plugin.Connectivity;
 using Polly;
 using Polly.Retry;
 using SecretSanta.Models;
@@ -30,12 +29,10 @@ namespace SecretSanta.Services
 			items = new List<ParticipantDTO>();
 		}
 
-		public async Task<IEnumerable<ParticipantDTO>> GetItemsAsync(bool forceRefresh = false)
-		{
-			if (forceRefresh && CrossConnectivity.Current.IsConnected)
-			{
-				await retryPolicy.ExecuteAsync(async () =>
-				{
+		public async Task<IEnumerable<ParticipantDTO>> GetItemsAsync(bool forceRefresh = false) {
+			NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+			if (forceRefresh && accessType == NetworkAccess.Internet) {
+				await retryPolicy.ExecuteAsync(async () => {
 					var json = await client.GetStringAsync($"api/Participant");
 
 					items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<ParticipantDTO>>(json));
@@ -47,7 +44,9 @@ namespace SecretSanta.Services
 
 		public async Task<ParticipantDTO> GetItemAsync(int id)
 		{
-			if (id > 0 && CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (id > 0 && accessType == NetworkAccess.Internet)
 			{
 				var json = await client.GetStringAsync($"api/item/{id}");
 				return await Task.Run(() => JsonConvert.DeserializeObject<ParticipantDTO>(json));
@@ -58,7 +57,8 @@ namespace SecretSanta.Services
 
 		public async Task<bool> AddItemAsync(ParticipantDTO item)
 		{
-            if (item == null || !CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (item == null || !(accessType == NetworkAccess.Internet))
             {
                 return false;
             }
@@ -72,7 +72,8 @@ namespace SecretSanta.Services
 
 		public async Task<bool> UpdateItemAsync(ParticipantDTO item)
 		{
-            if (item == null || item.Id == 0 || !CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (item == null || item.Id == 0 || !(accessType == NetworkAccess.Internet))
             {
                 return false;
             }
@@ -88,7 +89,8 @@ namespace SecretSanta.Services
 
 		public async Task<bool> DeleteItemAsync(int id)
 		{
-            if (!CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (!(accessType == NetworkAccess.Internet))
             {
                 return false;
             }

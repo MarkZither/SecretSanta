@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Plugin.Connectivity;
 using SecretSanta.Models;
 
 namespace SecretSanta.Services
@@ -24,7 +23,8 @@ namespace SecretSanta.Services
 
 		public async Task<IEnumerable<Message>> GetItemsAsync(bool forceRefresh = false)
 		{
-			if (forceRefresh && CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (forceRefresh && accessType == NetworkAccess.Internet)
 			{
 				var json = await client.GetStringAsync($"api/Messaging");
 				items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Message>>(json));
@@ -35,7 +35,8 @@ namespace SecretSanta.Services
 
 		public async Task<Message> GetItemAsync(int id)
 		{
-			if (id > 0 && CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (id > 0 && accessType == NetworkAccess.Internet)
 			{
 				var json = await client.GetStringAsync($"api/Messaging/{id}");
 				return await Task.Run(() => JsonConvert.DeserializeObject<Message>(json));
@@ -46,7 +47,8 @@ namespace SecretSanta.Services
 
 		public async Task<bool> AddItemAsync(Message item)
 		{
-            if (item == null || !CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (item == null || !(accessType == NetworkAccess.Internet))
             {
                 return false;
             }
@@ -60,7 +62,8 @@ namespace SecretSanta.Services
 
 		public async Task<bool> UpdateItemAsync(Message item)
 		{
-            if (item == null || item.Id == 0 || !CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (item == null || item.Id == 0 || !(accessType == NetworkAccess.Internet))
             {
                 return false;
             }
@@ -76,7 +79,8 @@ namespace SecretSanta.Services
 
 		public async Task<bool> DeleteItemAsync(int id)
 		{
-            if (!CrossConnectivity.Current.IsConnected)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+            if (!(accessType == NetworkAccess.Internet))
             {
                 return false;
             }

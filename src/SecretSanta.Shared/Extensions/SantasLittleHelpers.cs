@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +44,7 @@ namespace SecretSanta.Extensions
             source.Insert(0, rotateBuffer);
         }
 
-        public static IDictionary<K, V> ToDictionary<K, V>(this IEnumerable<KeyValuePair<K, V>> source)
+        public static IDictionary<K, V> ToSantaDictionary<K, V>(this IEnumerable<KeyValuePair<K, V>> source)
         {
             var dict = new Dictionary<K, V>();
             foreach (var pair in source)

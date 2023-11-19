@@ -30,7 +30,7 @@ namespace SecretSanta.Shared
                     if (PairingIsValid(bannedPairings, result))
                     {
                         isValidPairings = true;
-                        return result.ToDictionary();
+                        return result.ToSantaDictionary();
                     }
                     tries++;
                     tried++;
@@ -67,7 +67,7 @@ namespace SecretSanta.Shared
 
                 if (PairingIsValid(bannedPairings, result))
                 {
-                    yield return result.ToDictionary();
+                    yield return result.ToSantaDictionary();
                 }
             }
         }

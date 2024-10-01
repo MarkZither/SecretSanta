@@ -32,14 +32,14 @@
 
   <!-- NuGet dependencies shared across projects -->
   <PropertyGroup>
-    <MicrosoftAspNetCorePackageVersion>7.0.13</MicrosoftAspNetCorePackageVersion>
-    <MicrosoftEntityFrameworkCorePackageVersion>7.0.13</MicrosoftEntityFrameworkCorePackageVersion>
-    <MicrosoftExtensionsPackageVersion>7.0.0</MicrosoftExtensionsPackageVersion>
-    <AspNetCoreHealthChecksVersion>6.0.5</AspNetCoreHealthChecksVersion>
-    <AspNetCoreHealthChecksSqlServerVersion>6.0.2</AspNetCoreHealthChecksSqlServerVersion>
-    <AspNetCoreHealthChecksIdSrvVersion>6.0.2</AspNetCoreHealthChecksIdSrvVersion>
-    <AspNetCoreHealthChecksUIVersion>6.0.5</AspNetCoreHealthChecksUIVersion>
-    <AspNetCoreHealthChecksUIClientVersion>6.0.5</AspNetCoreHealthChecksUIClientVersion>
+    <MicrosoftAspNetCorePackageVersion>8.0.8</MicrosoftAspNetCorePackageVersion>
+    <MicrosoftEntityFrameworkCorePackageVersion>8.0.8</MicrosoftEntityFrameworkCorePackageVersion>
+    <MicrosoftExtensionsPackageVersion>8.0.0</MicrosoftExtensionsPackageVersion>
+    <AspNetCoreHealthChecksVersion>8.0.1</AspNetCoreHealthChecksVersion>
+    <AspNetCoreHealthChecksSqlServerVersion>8.0.2</AspNetCoreHealthChecksSqlServerVersion>
+    <AspNetCoreHealthChecksIdSrvVersion>8.0.1</AspNetCoreHealthChecksIdSrvVersion>
+    <AspNetCoreHealthChecksUIVersion>8.0.2</AspNetCoreHealthChecksUIVersion>
+    <AspNetCoreHealthChecksUIClientVersion>8.0.1</AspNetCoreHealthChecksUIClientVersion>
     <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
     <NewtonsoftVersion>13.0.3</NewtonsoftVersion>
   </PropertyGroup>

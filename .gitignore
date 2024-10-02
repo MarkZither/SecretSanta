@@ -265,3 +265,5 @@ __pycache__/
 /src/SecretSanta.Angular/.angular/cache/
 /src/DuendeAspNetIdentityServer/keys
 *.sqbpro
+/src/SecretSanta.MobileAppService/db/secretsanta - live do not delete.db-journal
+/src/SecretSanta.MobileAppService/db/secretsanta.db-journal

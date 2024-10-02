@@ -148,15 +148,33 @@ namespace SecretSanta.Views
             }
             try
             {
-                var res = SecretSanta.Shared.SecretSantaGenerator.Generate(viewModel.Items, banned);
-                StringBuilder sb = new StringBuilder();
-                foreach (var item in res)
+                var tries = 10;
+                var tried = 0;
+                while (tried < tries)
                 {
-                    var sent = await viewModel.MessagingDataStore.AddItemAsync(new Message() { GifterId = item.Key.Id, RecipientId = item.Value.Id });
-                    sb.AppendLine($"{item.Key.Name} ==> {item.Value.Name}");
+                    try
+                    {
+                        var res = SecretSanta.Shared.SecretSantaGenerator.Generate(viewModel.Items, banned);
+                        StringBuilder sb = new StringBuilder();
+                        foreach (var item in res)
+                        {
+                            var sent = await viewModel.MessagingDataStore.AddItemAsync(new Message() { GifterId = item.Key.Id, RecipientId = item.Value.Id });
+                            sb.AppendLine($"{item.Key.Name} ==> {item.Value.Name}");
+                        }
+                        //await DisplayAlert("Generated Santa matches", sb.ToString(), "Cancel");
+                        await DisplayAlert("Generated Santa matches", "It is a Secret!", "Ok");
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        if (tried == tries)
+                        {
+                            throw;
+                        }
+                    }
+                    tried++;
                 }
-                //await DisplayAlert("Generated Santa matches", sb.ToString(), "Cancel");
-                await DisplayAlert("Generated Santa matches", "It is a Secret!", "Ok");
+                
             }
             catch (ApplicationException aex) when (aex.Message.Equals("No valid santa list can be generated"))
             {
